@@ -10,7 +10,12 @@
       "loopback/common/mixins",
       "loopback/server/mixins",
       "../common/mixins",
-      "./mixins"
+      "./mixins",
+      "../node_modules/loopback-ds-timestamp-mixin"
     ]
+  },
+  "MyUser": {
+    "dataSource": "db",
+    "public": true
   }
 }
