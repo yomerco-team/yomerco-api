@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"commitmsg": "validate-commit-msg"
+		"commitmsg": "validate-commit-msg",
+		"commit": "npx git-cz"
 	},
 	"devDependencies": {
 		"commitizen": "^2.10.1",
@@ -12,7 +13,8 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "lerna run test"
+			"pre-commit": "lerna run test",
+			"pre-push": "lerna run test"
 		}
 	},
 	"config": {

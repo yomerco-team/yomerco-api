@@ -2,7 +2,12 @@ const app = require('./server')
 
 const ds = app.dataSources.db
 const tables = [
-  'MyUser'
+  'MyUser',
+  'MyRole',
+  'MyRoleMyUser',
+  'State',
+  'City',
+  'Address'
 ]
 
 ds.autoupdate(tables, (err) => {

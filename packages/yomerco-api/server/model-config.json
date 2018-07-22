@@ -17,5 +17,25 @@
   "MyUser": {
     "dataSource": "db",
     "public": true
+  },
+  "MyRole": {
+    "dataSource": "db",
+    "public": true
+  },
+  "MyRoleMyUser": {
+    "dataSource": "db",
+    "public": true
+  },
+  "State": {
+    "dataSource": "db",
+    "public": true
+  },
+  "City": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Address": {
+    "dataSource": "db",
+    "public": true
   }
 }
