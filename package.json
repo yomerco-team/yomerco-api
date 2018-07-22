@@ -4,7 +4,8 @@
 		"cz-conventional-changelog": "^2.1.0",
 		"husky": "^1.0.0-rc.13",
 		"lerna": "^2.11.0",
-		"standard": "*"
+		"standard": "*",
+		"validate-commit-msg": "^2.14.0"
 	},
 	"husky": {
 		"hooks": {
@@ -14,6 +15,24 @@
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"
-		}
+		},
+		"validate-commit-msg": {
+			"types": [
+			  "feat",
+			  "fix",
+			  "docs",
+			  "style",
+			  "refactor",
+			  "perf",
+			  "test",
+			  "chore",
+			  "revert"
+			],
+			"warnOnFail": false,
+			"maxSubjectLength": 100,
+			"subjectPattern": "^[A-Z]+-[0-9]+ - .*",
+			"subjectPatternErrorMsg": "Subject must be in format '123 - Commit message'",
+			"helpMessage": ""
+		  }
 	}
 }
