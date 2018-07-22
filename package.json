@@ -1,12 +1,12 @@
 {
 	"devDependencies": {
+		"husky": "^1.0.0-rc.13",
 		"lerna": "^2.11.0",
-		"standard": "*",
-		"husky": "^0.14.3"
+		"standard": "*"
 	},
 	"husky": {
 		"hooks": {
-		  "pre-commit": "lerna run test"
+			"pre-commit": "lerna run test"
 		}
-	  }
+	}
 }
