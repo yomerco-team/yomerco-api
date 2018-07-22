@@ -1,4 +1,7 @@
 {
+	"scripts": {
+		"commitmsg": "validate-commit-msg"
+	},
 	"devDependencies": {
 		"commitizen": "^2.10.1",
 		"cz-conventional-changelog": "^2.1.0",
@@ -30,7 +33,7 @@
 			],
 			"warnOnFail": false,
 			"maxSubjectLength": 100,
-			"subjectPattern": "^[A-Z]+-[0-9]+ - .*",
+			"subjectPattern": "[0-9]+ - .*",
 			"subjectPatternErrorMsg": "Subject must be in format '123 - Commit message'",
 			"helpMessage": ""
 		  }
