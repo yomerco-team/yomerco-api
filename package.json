@@ -1,7 +1,9 @@
 {
 	"scripts": {
 		"commitmsg": "validate-commit-msg",
-		"commit": "npx git-cz"
+		"commit": "git-cz",
+		"bootstrap": "lerna bootstrap && yarn",
+		"regenerate": "lerna clean && rm -rf ./node_modules && yarn && yarn bootstrap"
 	},
 	"devDependencies": {
 		"commitizen": "^2.10.1",
@@ -13,8 +15,8 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "lerna run test",
-			"pre-push": "lerna run test"
+			"pre-commit": "lerna run lint",
+			"pre-push": "lerna run lint"
 		}
 	},
 	"config": {
