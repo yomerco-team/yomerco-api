@@ -1,6 +1,6 @@
 {
-  "name": "Provider",
-  "plural": "providers",
+  "name": "ProductImage",
+  "plural": "product-images",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -14,29 +14,19 @@
     }
   },
   "properties": {
-    "urlImage": {
+    "name": {
       "type": "string"
     },
-    "description": {
+    "url": {
       "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "user": {
+    "product": {
       "type": "belongsTo",
-      "model": "MyUser",
-      "foreignKey": "userId"
-    },
-    "city": {
-      "type": "belongsTo",
-      "model": "City",
-      "foreignKey": "cityId"
-    },
-    "batches": {
-      "type": "hasMany",
-      "model": "Batch",
-      "foreignKey": "providerId"
+      "model": "Product",
+      "foreignKey": "productId"
     }
   },
   "acls": [],

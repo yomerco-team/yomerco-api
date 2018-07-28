@@ -45,5 +45,21 @@
   "Category": {
     "dataSource": "db",
     "public": true
+  },
+  "Product": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ProductImage": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Wharehouse": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Batch": {
+    "dataSource": "db",
+    "public": true
   }
 }

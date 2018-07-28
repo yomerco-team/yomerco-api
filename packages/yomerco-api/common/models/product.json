@@ -1,6 +1,6 @@
 {
-  "name": "Category",
-  "plural": "categories",
+  "name": "Product",
+  "plural": "products",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -22,27 +22,38 @@
       "type": "string",
       "required": true
     },
-    "level": {
+    "description": {
+      "type": "string"
+    },
+    "marginGain": {
       "type": "number",
       "required": true
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "available": {
+      "type": "boolean",
+      "default": true
     }
   },
   "validations": [],
   "relations": {
-    "categories": {
-      "type": "hasMany",
-      "model": "Category",
-      "foreignKey": "parentId"
-    },
     "category": {
       "type": "belongsTo",
       "model": "Category",
-      "foreignKey": "parentId"
-    },
-    "products": {
-      "type": "hasMany",
-      "model": "Product",
       "foreignKey": "categoryId"
+    },
+    "images": {
+      "type": "hasMany",
+      "model": "ProductImage",
+      "foreignKey": "productId"
+    },
+    "batches": {
+      "type": "hasMany",
+      "model": "Batch",
+      "foreignKey": "productId"
     }
   },
   "acls": [],

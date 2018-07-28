@@ -9,7 +9,11 @@ const tables = [
   'City',
   'Address',
   'Provider',
-  'Category'
+  'Category',
+  'Product',
+  'ProductImage',
+  'Wharehouse',
+  'Batch'
 ]
 
 ds.autoupdate(tables, (err) => {

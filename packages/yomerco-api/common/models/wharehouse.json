@@ -1,6 +1,6 @@
 {
-  "name": "City",
-  "plural": "cities",
+  "name": "Wharehouse",
+  "plural": "Wharehouses",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -16,10 +16,7 @@
   "properties": {
     "code": {
       "type": "string",
-      "required": true,
-      "index": {
-        "unique": true
-      }
+      "required": true
     },
     "name": {
       "type": "string",
@@ -28,25 +25,15 @@
   },
   "validations": [],
   "relations": {
-    "state": {
+    "city": {
       "type": "belongsTo",
-      "model": "State",
-      "foreignKey": "stateId"
-    },
-    "addresses": {
-      "type": "hasMany",
-      "model": "Address",
+      "model": "City",
       "foreignKey": "cityId"
     },
-    "providers": {
+    "batches": {
       "type": "hasMany",
-      "model": "Provider",
-      "foreignKey": "cityId"
-    },
-    "wharehouses": {
-      "type": "hasMany",
-      "model": "Wharehouse",
-      "foreignKey": "cityId"
+      "model": "Batch",
+      "foreignKey": "wharehouseId"
     }
   },
   "acls": [],
