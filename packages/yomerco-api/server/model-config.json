@@ -37,5 +37,9 @@
   "Address": {
     "dataSource": "db",
     "public": true
+  },
+  "Provider": {
+    "dataSource": "db",
+    "public": true
   }
 }
