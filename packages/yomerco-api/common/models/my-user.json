@@ -35,6 +35,11 @@
       "type": "hasMany",
       "model": "Address",
       "foreignKey": "userId"
+    },
+    "providers": {
+      "type": "hasMany",
+      "model": "Provider",
+      "foreignKey": "userId"
     }
   },
   "acls": [],

@@ -6,6 +6,13 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true,
+      "silenceWarnings": true
+    }
+  },
   "properties": {
     "code": {
       "type": "string",
@@ -29,6 +36,11 @@
     "addresses": {
       "type": "hasMany",
       "model": "Address",
+      "foreignKey": "cityId"
+    },
+    "providers": {
+      "type": "hasMany",
+      "model": "Provider",
       "foreignKey": "cityId"
     }
   },

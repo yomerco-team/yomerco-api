@@ -7,7 +7,9 @@ const tables = [
   'MyRoleMyUser',
   'State',
   'City',
-  'Address'
+  'Address',
+  'Provider',
+  'Category'
 ]
 
 ds.autoupdate(tables, (err) => {
