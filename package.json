@@ -1,6 +1,9 @@
 {
 	"scripts": {
-		"commitmsg": "validate-commit-msg"
+		"commitmsg": "validate-commit-msg",
+		"commit": "git-cz",
+		"bootstrap": "lerna bootstrap && yarn",
+		"regenerate": "lerna clean && rm -rf ./node_modules && yarn && yarn bootstrap"
 	},
 	"devDependencies": {
 		"commitizen": "^2.10.1",
