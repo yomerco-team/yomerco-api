@@ -1,5 +1,1 @@
-'use strict';
-
-module.exports = function(Productimage) {
-
-};
+module.exports = function (/* ProductImage */) {}
