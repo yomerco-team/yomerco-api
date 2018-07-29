@@ -24,21 +24,21 @@
 		},
 		"validate-commit-msg": {
 			"types": [
-			  "feat",
-			  "fix",
-			  "docs",
-			  "style",
-			  "refactor",
-			  "perf",
-			  "test",
-			  "chore",
-			  "revert"
+				"feat",
+				"fix",
+				"docs",
+				"style",
+				"refactor",
+				"perf",
+				"test",
+				"chore",
+				"revert"
 			],
 			"warnOnFail": false,
 			"maxSubjectLength": 100,
 			"subjectPattern": "[0-9]+ - .*",
 			"subjectPatternErrorMsg": "Subject must be in format '123 - Commit message'",
 			"helpMessage": ""
-		  }
+		}
 	}
 }
