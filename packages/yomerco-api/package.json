@@ -6,7 +6,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "lint": "standard --fix",
+    "lint": "../../node_modules/.bin/standard --fix",
     "start": "node .",
     "test": "standard",
     "dev": "../../node_modules/.bin/nodemon",
