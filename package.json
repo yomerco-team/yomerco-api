@@ -6,6 +6,7 @@
 		"regenerate": "lerna clean && rm -rf ./node_modules && yarn && yarn bootstrap"
 	},
 	"devDependencies": {
+		"babel-eslint": "^8.2.6",
 		"commitizen": "^2.10.1",
 		"cz-conventional-changelog": "^2.1.0",
 		"husky": "^1.0.0-rc.13",
@@ -24,21 +25,21 @@
 		},
 		"validate-commit-msg": {
 			"types": [
-			  "feat",
-			  "fix",
-			  "docs",
-			  "style",
-			  "refactor",
-			  "perf",
-			  "test",
-			  "chore",
-			  "revert"
+				"feat",
+				"fix",
+				"docs",
+				"style",
+				"refactor",
+				"perf",
+				"test",
+				"chore",
+				"revert"
 			],
 			"warnOnFail": false,
 			"maxSubjectLength": 100,
 			"subjectPattern": "[0-9]+ - .*",
 			"subjectPatternErrorMsg": "Subject must be in format '123 - Commit message'",
 			"helpMessage": ""
-		  }
+		}
 	}
 }
