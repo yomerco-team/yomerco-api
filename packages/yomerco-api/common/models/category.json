@@ -1,6 +1,6 @@
 {
-  "name": "MyUser",
-  "plural": "my-users",
+  "name": "Category",
+  "plural": "categories",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -14,32 +14,35 @@
     }
   },
   "properties": {
-    "fullName": {
+    "code": {
       "type": "string",
       "required": true
     },
-    "email": {
+    "name": {
       "type": "string",
+      "required": true
+    },
+    "level": {
+      "type": "number",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "roles": {
+    "categories": {
       "type": "hasMany",
-      "model": "MyRole",
-      "foreignKey": "userId",
-      "through": "MyRoleMyUser"
+      "model": "Category",
+      "foreignKey": "parentId"
     },
-    "addresses": {
-      "type": "hasMany",
-      "model": "Address",
-      "foreignKey": "userId"
+    "category": {
+      "type": "belongsTo",
+      "model": "Category",
+      "foreignKey": "parentId"
     },
-    "providers": {
+    "products": {
       "type": "hasMany",
-      "model": "Provider",
-      "foreignKey": "userId"
+      "model": "Product",
+      "foreignKey": "categoryId"
     }
   },
   "acls": [],

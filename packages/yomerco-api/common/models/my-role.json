@@ -1,6 +1,6 @@
 {
-  "name": "MyUser",
-  "plural": "my-users",
+  "name": "MyRole",
+  "plural": "my-roles",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -14,32 +14,25 @@
     }
   },
   "properties": {
-    "fullName": {
+    "code": {
       "type": "string",
-      "required": true
+      "required": true,
+      "index": {
+        "unique": true
+      }
     },
-    "email": {
+    "name": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "roles": {
+    "users": {
       "type": "hasMany",
-      "model": "MyRole",
-      "foreignKey": "userId",
+      "model": "MyUser",
+      "foreignKey": "roleId",
       "through": "MyRoleMyUser"
-    },
-    "addresses": {
-      "type": "hasMany",
-      "model": "Address",
-      "foreignKey": "userId"
-    },
-    "providers": {
-      "type": "hasMany",
-      "model": "Provider",
-      "foreignKey": "userId"
     }
   },
   "acls": [],

@@ -1,6 +1,6 @@
 {
-  "name": "MyUser",
-  "plural": "my-users",
+  "name": "Wharehouse",
+  "plural": "Wharehouses",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -14,32 +14,26 @@
     }
   },
   "properties": {
-    "fullName": {
+    "code": {
       "type": "string",
       "required": true
     },
-    "email": {
+    "name": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "roles": {
-      "type": "hasMany",
-      "model": "MyRole",
-      "foreignKey": "userId",
-      "through": "MyRoleMyUser"
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": "cityId"
     },
-    "addresses": {
+    "batches": {
       "type": "hasMany",
-      "model": "Address",
-      "foreignKey": "userId"
-    },
-    "providers": {
-      "type": "hasMany",
-      "model": "Provider",
-      "foreignKey": "userId"
+      "model": "Batch",
+      "foreignKey": "wharehouseId"
     }
   },
   "acls": [],
