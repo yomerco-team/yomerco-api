@@ -3,20 +3,22 @@
 		"commitmsg": "validate-commit-msg",
 		"commit": "git-cz",
 		"bootstrap": "lerna bootstrap && yarn",
-		"regenerate": "lerna clean && rm -rf ./node_modules && yarn && yarn bootstrap"
+		"regenerate": "lerna clean && rm -rf ./node_modules && yarn && yarn bootstrap",
+		"test": "jest"
 	},
 	"devDependencies": {
 		"commitizen": "^2.10.1",
 		"cz-conventional-changelog": "^2.1.0",
 		"husky": "^1.0.0-rc.13",
+		"jest": "^23.4.2",
 		"lerna": "^2.11.0",
 		"standard": "*",
 		"validate-commit-msg": "^2.14.0"
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "lerna run lint",
-			"pre-push": "lerna run lint"
+			"pre-commit": "lerna run lint && jest",
+			"pre-push": "lerna run lint $$ jest"
 		}
 	},
 	"config": {
@@ -25,21 +27,24 @@
 		},
 		"validate-commit-msg": {
 			"types": [
-			  "feat",
-			  "fix",
-			  "docs",
-			  "style",
-			  "refactor",
-			  "perf",
-			  "test",
-			  "chore",
-			  "revert"
+				"feat",
+				"fix",
+				"docs",
+				"style",
+				"refactor",
+				"perf",
+				"test",
+				"chore",
+				"revert"
 			],
 			"warnOnFail": false,
 			"maxSubjectLength": 100,
 			"subjectPattern": "[0-9]+ - .*",
 			"subjectPatternErrorMsg": "Subject must be in format '123 - Commit message'",
 			"helpMessage": ""
-		  }
+		}
+	},
+	"jest": {
+		"testURL": "http://localhost/"
 	}
 }
