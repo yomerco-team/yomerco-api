@@ -1,0 +1,54 @@
+{
+  "name": "City",
+  "plural": "cities",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true,
+      "silenceWarnings": true
+    }
+  },
+  "properties": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      }
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "state": {
+      "type": "belongsTo",
+      "model": "State",
+      "foreignKey": "stateId"
+    },
+    "addresses": {
+      "type": "hasMany",
+      "model": "Address",
+      "foreignKey": "cityId"
+    },
+    "providers": {
+      "type": "hasMany",
+      "model": "Provider",
+      "foreignKey": "cityId"
+    },
+    "wharehouses": {
+      "type": "hasMany",
+      "model": "Wharehouse",
+      "foreignKey": "cityId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,41 @@
+{
+  "name": "Wharehouse",
+  "plural": "Wharehouses",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true,
+      "silenceWarnings": true
+    }
+  },
+  "properties": {
+    "code": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "city": {
+      "type": "belongsTo",
+      "model": "City",
+      "foreignKey": "cityId"
+    },
+    "batches": {
+      "type": "hasMany",
+      "model": "Batch",
+      "foreignKey": "wharehouseId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

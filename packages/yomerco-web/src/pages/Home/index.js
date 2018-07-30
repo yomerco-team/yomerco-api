@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import Header from '../../components/Header'
-import { Container } from './styles'
+import logo from '../../assets/logo.svg'
+import { Header, Container } from './styles'
 
 class Home extends Component {
   render () {
     return (
       <Container>
-        <Header />
+        <Header>
+          <img src={logo} alt='YoMerco-logo-mercado-online' />
+        </Header>
       </Container>
     )
   }
