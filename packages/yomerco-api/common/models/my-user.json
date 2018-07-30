@@ -24,24 +24,7 @@
     }
   },
   "validations": [],
-  "relations": {
-    "roles": {
-      "type": "hasMany",
-      "model": "MyRole",
-      "foreignKey": "userId",
-      "through": "MyRoleMyUser"
-    },
-    "addresses": {
-      "type": "hasMany",
-      "model": "Address",
-      "foreignKey": "userId"
-    },
-    "providers": {
-      "type": "hasMany",
-      "model": "Provider",
-      "foreignKey": "userId"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }
