@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { DrawerContainer, DrawerComp, DrawerIcon } from './styles'
 
 class Drawer extends Component {
-    state = {
+     state = {
        openLeft: false,
        openRight: false,
        width: '70%'

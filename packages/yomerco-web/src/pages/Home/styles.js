@@ -1,12 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.body`
+export const Container = styled.div`
 padding: 0;
 margin: 0;
-`
-
-export const Header = styled.div`
-background-color: #409640;
-height: auto;
-width: 100%;
 `
