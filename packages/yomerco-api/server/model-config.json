@@ -17,5 +17,73 @@
   "MyUser": {
     "dataSource": "db",
     "public": true
+  },
+  "MyRole": {
+    "dataSource": "db",
+    "public": true
+  },
+  "MyRoleMyUser": {
+    "dataSource": "db",
+    "public": true
+  },
+  "State": {
+    "dataSource": "db",
+    "public": true
+  },
+  "City": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Address": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Provider": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Category": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Product": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ProductImage": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Wharehouse": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Batch": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Order": {
+    "dataSource": "db",
+    "public": true
+  },
+  "OrderStatus": {
+    "dataSource": "db",
+    "public": true
+  },
+  "OrderDetail": {
+    "dataSource": "db",
+    "public": true
+  },
+  "PaymentMethod": {
+    "dataSource": "db",
+    "public": true
+  },
+  "PaymentStatus": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Payment": {
+    "dataSource": "db",
+    "public": true
   }
 }

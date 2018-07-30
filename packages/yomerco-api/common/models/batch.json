@@ -1,0 +1,61 @@
+{
+  "name": "Batch",
+  "plural": "batches",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true,
+      "silenceWarnings": true
+    }
+  },
+  "properties": {
+    "inventory": {
+      "type": "number",
+      "required": true
+    },
+    "purchasePrice": {
+      "type": "number",
+      "required": true
+    },
+    "iva": {
+      "type": "number",
+      "required": false,
+      "default": 0
+    },
+    "otherTaxes": {
+      "type": "number",
+      "required": false,
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "product": {
+      "type": "belongsTo",
+      "model": "Product",
+      "foreignKey": "productId"
+    },
+    "wharehouse": {
+      "type": "belongsTo",
+      "model": "Wharehouse",
+      "foreignKey": "wharehouseId"
+    },
+    "provider": {
+      "type": "belongsTo",
+      "model": "Provider",
+      "foreignKey": "providerId"
+    },
+    "orderDetails": {
+      "type": "hasMany",
+      "model": "OrderDetail",
+      "foreignKey": "batchId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

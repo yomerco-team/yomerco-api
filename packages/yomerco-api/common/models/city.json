@@ -1,6 +1,6 @@
 {
-  "name": "MyUser",
-  "plural": "my-users",
+  "name": "City",
+  "plural": "cities",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -14,37 +14,39 @@
     }
   },
   "properties": {
-    "fullName": {
+    "code": {
       "type": "string",
-      "required": true
+      "required": true,
+      "index": {
+        "unique": true
+      }
     },
-    "email": {
+    "name": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "roles": {
-      "type": "hasMany",
-      "model": "MyRole",
-      "foreignKey": "userId",
-      "through": "MyRoleMyUser"
+    "state": {
+      "type": "belongsTo",
+      "model": "State",
+      "foreignKey": "stateId"
     },
     "addresses": {
       "type": "hasMany",
       "model": "Address",
-      "foreignKey": "userId"
+      "foreignKey": "cityId"
     },
     "providers": {
       "type": "hasMany",
       "model": "Provider",
-      "foreignKey": "userId"
+      "foreignKey": "cityId"
     },
-    "orders": {
+    "wharehouses": {
       "type": "hasMany",
-      "model": "Order",
-      "foreignKey": "userId"
+      "model": "Wharehouse",
+      "foreignKey": "cityId"
     }
   },
   "acls": [],

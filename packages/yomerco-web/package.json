@@ -17,7 +17,7 @@
       "parser": "babel-eslint"
     },
   "scripts": {
-    "lint" : "standard --fix",
+    "lint" : "../../node_modules/.bin/standard standard --fix",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
