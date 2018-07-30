@@ -15,8 +15,7 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "lerna run lint",
-			"pre-push": "lerna run lint"
+			"pre-commit": "lerna run lint"
 		}
 	},
 	"config": {

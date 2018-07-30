@@ -3,15 +3,5 @@
   "packages": [
     "packages/*"
   ],
-  "npmClient": "yarn",
-  "npmClientArgs": [
-    "--ignore-engines"
-  ],
-  "nohoist": true,
-  "version": "independent",
-  "commands": {
-    "bootstrap": {
-      "ignore": "_yomerco-*"
-    }
-  }
+  "version": "0.0.0"
 }

@@ -17,49 +17,5 @@
   "MyUser": {
     "dataSource": "db",
     "public": true
-  },
-  "MyRole": {
-    "dataSource": "db",
-    "public": true
-  },
-  "MyRoleMyUser": {
-    "dataSource": "db",
-    "public": true
-  },
-  "State": {
-    "dataSource": "db",
-    "public": true
-  },
-  "City": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Address": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Provider": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Category": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Product": {
-    "dataSource": "db",
-    "public": true
-  },
-  "ProductImage": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Wharehouse": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Batch": {
-    "dataSource": "db",
-    "public": true
   }
 }
