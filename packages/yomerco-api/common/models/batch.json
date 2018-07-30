@@ -49,6 +49,11 @@
       "type": "belongsTo",
       "model": "Provider",
       "foreignKey": "providerId"
+    },
+    "orderDetails": {
+      "type": "hasMany",
+      "model": "OrderDetail",
+      "foreignKey": "batchId"
     }
   },
   "acls": [],

@@ -40,6 +40,11 @@
       "type": "hasMany",
       "model": "Provider",
       "foreignKey": "userId"
+    },
+    "orders": {
+      "type": "hasMany",
+      "model": "Order",
+      "foreignKey": "userId"
     }
   },
   "acls": [],

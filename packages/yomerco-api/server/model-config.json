@@ -61,5 +61,29 @@
   "Batch": {
     "dataSource": "db",
     "public": true
+  },
+  "Order": {
+    "dataSource": "db",
+    "public": true
+  },
+  "OrderStatus": {
+    "dataSource": "db",
+    "public": true
+  },
+  "OrderDetail": {
+    "dataSource": "db",
+    "public": true
+  },
+  "PaymentMethod": {
+    "dataSource": "db",
+    "public": true
+  },
+  "PaymentStatus": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Payment": {
+    "dataSource": "db",
+    "public": true
   }
 }

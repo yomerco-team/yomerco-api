@@ -13,7 +13,13 @@ const tables = [
   'Product',
   'ProductImage',
   'Wharehouse',
-  'Batch'
+  'Batch',
+  'OrderStatus',
+  'Order',
+  'OrderDetail',
+  'PaymentMethod',
+  'PaymentStatus',
+  'Payment'
 ]
 
 ds.autoupdate(tables, (err) => {
