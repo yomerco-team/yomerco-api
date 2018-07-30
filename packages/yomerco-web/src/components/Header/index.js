@@ -7,7 +7,7 @@ import SearchBox from '../Search/searchBox'
 import { HeaderContainer, Logo, LogoContainer, HeaderContent } from './styles'
 
 class Header extends Component {
-  state = { // eslint-disable-line
+  state = {
     searchPressed: false
   }
 
