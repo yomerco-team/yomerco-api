@@ -13,13 +13,20 @@
 		"jest": "^23.4.2",
 		"lerna": "^2.11.0",
 		"standard": "*",
-		"validate-commit-msg": "^2.14.0"
+		"validate-commit-msg": "^2.14.0",
+		"babel-eslint": "^8.2.6"
 	},
 	"husky": {
 		"hooks": {
 			"pre-commit": "lerna run lint && jest",
 			"pre-push": "lerna run lint && jest"
 		}
+	},
+	"jest": {
+		"testURL": "http://localhost/"
+	},
+	"standard": {
+		"parser": "babel-eslint"
 	},
 	"config": {
 		"commitizen": {
@@ -43,8 +50,5 @@
 			"subjectPatternErrorMsg": "Subject must be in format '123 - Commit message'",
 			"helpMessage": ""
 		}
-	},
-	"jest": {
-		"testURL": "http://localhost/"
 	}
 }

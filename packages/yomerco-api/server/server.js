@@ -2,6 +2,8 @@
 
 let loopback = require('loopback')
 let boot = require('loopback-boot')
+// implemento dotenv
+require('dotenv').config()
 
 let app = module.exports = loopback()
 
