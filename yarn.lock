@@ -2780,6 +2780,10 @@ jest-mock@^23.2.0:
   version "23.2.0"
   resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-23.2.0.tgz#ad1c60f29e8719d47c26e1138098b6d18b261134"
 
+jest-preset-loopback@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jest-preset-loopback/-/jest-preset-loopback-1.0.0.tgz#e8fc92d66509ac9f6f9aea1e51d80ff8011e2fe9"
+
 jest-regex-util@^23.3.0:
   version "23.3.0"
   resolved "https://registry.yarnpkg.com/jest-regex-util/-/jest-regex-util-23.3.0.tgz#5f86729547c2785c4002ceaa8f849fe8ca471bc5"
