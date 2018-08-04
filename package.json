@@ -23,10 +23,8 @@
 		}
 	},
 	"jest": {
-		"testURL": "http://localhost/"
-	},
-	"standard": {
-		"parser": "babel-eslint"
+		"testURL": "http://localhost/",
+		"preset": "jest-preset-loopback"
 	},
 	"config": {
 		"commitizen": {

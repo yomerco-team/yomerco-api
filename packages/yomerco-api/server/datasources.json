@@ -3,7 +3,7 @@
     "host": "localhost",
     "port": 5432,
     "database": "yomerco",
-    "password": "",
+    "password": "toor",
     "name": "db",
     "connector": "postgresql",
     "user": "postgres"
