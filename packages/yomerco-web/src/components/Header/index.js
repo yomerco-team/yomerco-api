@@ -4,7 +4,7 @@ import Drawer from '../Drawer'
 import Search from '../Search'
 import Cart from '../Cart'
 import SearchBox from '../Search/searchBox'
-import { HeaderContainer, Logo, LogoContainer, HeaderContent } from './styles'
+import { HeaderContainer, Logo, LogoContainer, HeaderContent, Shadow } from './styles'
 
 class Header extends Component {
   state = {
@@ -27,6 +27,7 @@ class Header extends Component {
           <Cart />
         </HeaderContainer>
         <SearchBox active={this.state.searchPressed} />
+        <Shadow onClick={() => this.setState({searchPressed: !this.state.searchPressed})} active={this.state.searchPressed} />
       </HeaderContent>
     )
   }

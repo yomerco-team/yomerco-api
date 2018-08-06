@@ -10,10 +10,11 @@ justify-content: space-between;
 `
 
 export const HeaderContent = styled.div`
-background-color: #409640;
+background-color: rgba(0,0,0,0.5);
 height: auto;
 width: 100%;
 display: flex;
+position: fixed;
 flex-direction: column;
 `
 
@@ -29,4 +30,9 @@ display: flex;
 justify-content: center;
 align-items: center;
 border-right: 1px solid #6cad6c;
+`
+
+export const Shadow = styled.a`
+display: ${props => props.active ? 'flex' : 'none'};
+height: 100vh;
 `

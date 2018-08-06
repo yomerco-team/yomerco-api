@@ -1,13 +1,25 @@
 import React, { Component } from 'react'
 import Header from '../../components/Header'
-import { Container } from './styles'
+import ProductCard from '../../components/ProductCard'
+import { Container, Content } from './styles'
 
 class Home extends Component {
   render () {
     return (
-      <Container>
+      <Content>
         <Header />
-      </Container>
+        <Container>
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+        </Container>
+      </Content>
     )
   }
 }
