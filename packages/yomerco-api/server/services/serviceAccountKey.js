@@ -1,0 +1,12 @@
+module.exports = {
+  type: 'service_account',
+  project_id: 'yomerco-dev',
+  private_key_id: '639e1d50bf82b641039c8552d37e084186c77e61',
+  private_key: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzXme06Oey5K/y\nNM/v1vO7Igegk3BmdxP9nuM6j3WSQHCkGbGnJFs/6CpNFPYkNeU7U0zFX3RgmxKQ\n2FZALdwzwMQ7poRSt4CbIcWJ8d3ta3yGO9rp3ScCiTwsGLlWI7vGgNWDHM/bbbgM\n6MR8UGTuibR+8Eam3hM871VZG3k7EtKllEAONbugN9MR+5LJ0UZmXJrDbndHwg/V\n7qAIocIq7MzZ5AdiKpF1nJ+T/B7t3QUT6LMV5Tcermy6M2pcToRhgtYq5O7YXOw0\nWFxeY2VfOAPGu6vK1GOacvgsD+bb6T/v0QAcjQBj5ej6CJX4bNsSw0RZKyebFs1u\nylhzpcijAgMBAAECggEAG+B0urul4vpC1CBcHtjn+XIBAHZZtjsUisrKYvwP2EKW\nnxJ1N1Zhri19gYxb8uXDcjRwjo5WznrbaFKPGRtniU2Q0fp/v0FQxgt6IYXLKY6W\nhGBCFi2uVekRRoMzLs2P7fpw9JciQOas/6iffPibry0MtdvPBzklgUdrGtW3wjPY\nS6yQ2mA4SnxXUbAFzWyH3fiknBBvdptgmV4zs2jrN8NgSrf0HkcrhTjm1YEAuARF\nxQGkPBNzd183ZBIDgLay6aR/7upSDKXSSBqZl5BhqQcDAZp89ujbxuwKJiLIWWXx\nBHo3co+BPGBJ3j+BseaqhXPXLR2ph47DrbGb/S6/0QKBgQDrn64iBmjyVuzy2HX4\nKe5euspz/2mMC1BB6J8qITCRO19vJquknMiVxO/H4KLXer8jrW2qHbMRUWQ655JA\nRKQUIZzNAaLQJE6nVk/rRWykSpL0VzATncZjWpRtx2Lq5MIgqh0el7Et19wLsbdr\nJ0LLijMDuN6ZLwjwsexSF5ARcQKBgQDC4VUuyJlond1ChasqquL14h+dZFI+A1tx\nVzD/KCIq2Us82Q2P3iUTmFXHHVrBoxJ5oOgCTbiwCsZmK1EC0LINA02ioU2oP6oc\n2zIiP67g6jO7NaZY/gVzZ8YVapJBPfwrsL3SvvTizIsyVZDR6J4a8PKPWKJYx/YB\nHrSwEXGxUwKBgDg3PMB5bwiCnL3Dz0GKH4kSX8MVKQV0nY1cBr1ydbfwxnAqdcEs\ndt7kwaCag7+NVZUZh5SSyWpUVOmI3mfe+Jak/lgbD9FBGFLsUNz9D1KTSERrmNjV\nR8PklI0siPkp4vcQHypxXqBlY+aWXACAuXr+WfWFYfaCNkvW518eqAzBAoGBAKUI\nxmaUIrZh2hqXsFi11vZ7xGI5rxwtI6dcO3YZurWmxvyEo+OOML/jZeD1jwIk42R1\nS4WH5DvRJCspy7Uin2Y9weVTzLwLDjjZuB8g5yw5qg2EZZc/p8YPv8QrOChgIcmu\nJ1Ltu9zFc6vwom/hGuOd4Qxb90BQNpjENChW3X1ZAoGAbN/dd1Vst/+9sRisUVmR\neme4p7q4DiIn17Af5o0EG5Cx3JSL4oJ5TAQyzcPjyHovQrAz5fESNA1va8mra1aX\n5Qx1lwBGwPMqLVKMD6nkJoo4pHC+Oz1BcWVZa0Zz5m3GmXRu8mij6uDn+meJgOa1\nsluH6cAZtoO6mi9tu8H139o=\n-----END PRIVATE KEY-----\n',
+  client_email: 'firebase-adminsdk-xes67@yomerco-dev.iam.gserviceaccount.com',
+  client_id: '117667334753487742927',
+  auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+  token_uri: 'https://accounts.google.com/o/oauth2/token',
+  auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+  client_x509_cert_url: 'https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-xes67%40yomerco-dev.iam.gserviceaccount.com'
+}
