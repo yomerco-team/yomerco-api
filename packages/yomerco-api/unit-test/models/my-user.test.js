@@ -1,12 +1,16 @@
 /* eslint-env jest */
 require('dotenv').config()
 process.env.NODE_ENV = 'test'
-console.log('user ', process.env.DB_USER)
 const faker = require('faker')
 
-test('create a user in firebase', async () => {
+let app
+beforeAll(() => {
+  app = require('../../server/server')
+  return app
+})
+
+test('create and delete a user in firebase', async () => {
   expect.assertions(1)
-  const app = require('../../server/server')
   const { MyUser } = app.models
   const randomEmail = faker.internet.email().toLowerCase()
 
