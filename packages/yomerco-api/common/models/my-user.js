@@ -48,7 +48,7 @@ module.exports = function (MyUser) {
       status: 200,
       errorStatus: 400
     },
-    description: 'Hola'
+    description: 'Create a user in firebase'
   })
 
   /**
