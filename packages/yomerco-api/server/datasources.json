@@ -1,11 +1,3 @@
 {
-  "db": {
-    "host": "localhost",
-    "port": 5432,
-    "database": "yomerco",
-    "password": "toor",
-    "name": "db",
-    "connector": "postgresql",
-    "user": "postgres"
-  }
+  "db": {}
 }

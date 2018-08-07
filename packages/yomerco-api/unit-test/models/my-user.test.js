@@ -1,5 +1,7 @@
 /* eslint-env jest */
+require('dotenv').config()
 process.env.NODE_ENV = 'test'
+console.log('user ', process.env.DB_USER)
 const faker = require('faker')
 
 test('create a user in firebase', async () => {

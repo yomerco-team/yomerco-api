@@ -1,9 +1,15 @@
 'use strict'
 
-let loopback = require('loopback')
-let boot = require('loopback-boot')
-// implemento dotenv
-require('dotenv').config()
+const loopback = require('loopback')
+const boot = require('loopback-boot')
+const path = require('path')
+
+// Get the .env path
+const envPath = path.resolve(__dirname, '../.env')
+// start dotenv
+require('dotenv').config({
+  path: envPath
+})
 
 let app = module.exports = loopback()
 
