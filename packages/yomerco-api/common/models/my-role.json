@@ -33,6 +33,11 @@
       "model": "MyUser",
       "foreignKey": "roleId",
       "through": "MyRoleMyUser"
+    },
+    "permissions": {
+      "type": "hasMany",
+      "model": "Permission",
+      "foreignKey": "rolId"
     }
   },
   "acls": [],

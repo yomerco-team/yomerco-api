@@ -19,7 +19,9 @@ const tables = [
   'OrderDetail',
   'PaymentMethod',
   'PaymentStatus',
-  'Payment'
+  'Payment',
+  'Parameter',
+  'Permission'
 ]
 
 ds.autoupdate(tables, (err) => {
