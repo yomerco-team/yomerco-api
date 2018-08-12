@@ -4,7 +4,7 @@ const ds = app.dataSources.db
 const tables = [
   'MyUser',
   'MyRole',
-  'MyRoleMyUser',
+  'AssinedRole',
   'State',
   'City',
   'Address',

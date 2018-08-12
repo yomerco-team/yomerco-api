@@ -24,7 +24,7 @@
     "rol": {
       "type": "belongsTo",
       "model": "MyRole",
-      "foreignKey": "rolId"
+      "foreignKey": "roleId"
     }
   },
   "acls": [],

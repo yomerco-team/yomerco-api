@@ -22,7 +22,7 @@
     "dataSource": "db",
     "public": true
   },
-  "MyRoleMyUser": {
+  "AssinedRole": {
     "dataSource": "db",
     "public": true
   },

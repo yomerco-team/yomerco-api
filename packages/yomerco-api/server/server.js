@@ -3,6 +3,7 @@
 const loopback = require('loopback')
 const boot = require('loopback-boot')
 const path = require('path')
+const firebaseMiddleware = require('../server/middleware/firebase')
 
 // Get the .env path
 const envPath = path.resolve(__dirname, '../.env')
@@ -12,6 +13,8 @@ require('dotenv').config({
 })
 
 let app = module.exports = loopback()
+
+app.middleware('routes:before', firebaseMiddleware())
 
 app.start = () => {
   // start the web server

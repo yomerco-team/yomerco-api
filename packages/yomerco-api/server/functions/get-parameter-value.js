@@ -1,5 +1,3 @@
-const app = require('../server/server')
-
 /**
  * Function to get the value of a parameter store in the data base
  *
@@ -7,6 +5,8 @@ const app = require('../server/server')
  * @returns {String} valor del parametro
  */
 const getParameterValue = async name => {
+  const app = require('../server')
+
   const { Parameter } = app.models
   let parameterInstance = null
   try {
