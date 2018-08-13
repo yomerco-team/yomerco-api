@@ -6,7 +6,8 @@ import logoAlt from '../../assets/logo-alt.svg'
 import ProductCard from '../../components/ProductCard'
 import {
   Container,
-  Content, Section,
+  Content,
+  Section,
   Image,
   Title,
   ValueProposal,
@@ -21,6 +22,20 @@ import {
 
 class Home extends Component {
   render () {
+    const { data } = this.props
+    const products = data.map((product) => {
+      return (
+        <ProductCard
+          name={product.name}
+          id={product.id}
+          url={product.url}
+          image={product.image}
+          price={product.price}
+          unit={product.unit}
+          key={product.id}
+        />
+      )
+    })
     return (
       <Content>
         <Header />
@@ -35,12 +50,7 @@ class Home extends Component {
           <SectionTitle>
             Productos de temporada
           </SectionTitle>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {products}
           <SeeAll>
             Ver todos los productos
           </SeeAll>
