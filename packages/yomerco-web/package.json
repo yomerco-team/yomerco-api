@@ -2,11 +2,15 @@
   "name": "yomerco-web",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "babel-eslint": "^8.2.6"
+  },
   "dependencies": {
     "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.4.2",
     "react-icons": "^2.2.7",
     "react-motion-drawer": "^3.1.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "styled-components": "^3.3.3"
   },
@@ -14,7 +18,7 @@
 		"parser": "babel-eslint"
 	},
   "scripts": {
-    "lint" : "../../node_modules/.bin/standard standard --fix",
+    "lint": "../../node_modules/.bin/standard standard --fix",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

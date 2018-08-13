@@ -5,6 +5,7 @@ import Search from '../Search'
 import Cart from '../Cart'
 import SearchBox from '../Search/searchBox'
 import { HeaderContainer, Logo, LogoContainer, HeaderContent, Shadow } from './styles'
+import { Link } from 'react-router-dom'
 
 class Header extends Component {
   state = {
@@ -21,7 +22,9 @@ class Header extends Component {
         <HeaderContainer>
           <Drawer />
           <LogoContainer>
+          <Link to='/'>
             <Logo src={logo} alt='YoMerco-logo-mercado-online' />
+            </Link>
           </LogoContainer>
           <Search toggle={() => this.toggleSearch()} active={this.state.searchPressed} />
           <Cart />
