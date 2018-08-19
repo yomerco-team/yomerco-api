@@ -7,7 +7,8 @@ module.exports = () => async (req, res, next) => {
   if (!authorization && req.query.token) { authorization = `Bearer ${req.query.token}` }
 
   const method = req.method
-  const modelPluralName = req.url.split('/')[2].split('?')[0]
+
+  const modelPluralName = req.url.split('/')[2] ? req.url.split('/')[2].split('?')[0] : req.url.split('/')[1]
 
   // Si no tiene autorización valido los permisos del invitado
   if (!authorization) {
