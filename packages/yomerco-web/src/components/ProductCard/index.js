@@ -13,6 +13,7 @@ import {
   Quantity,
   DeleteIcon
 } from './styles'
+import { Link } from 'react-router-dom'
 
 class ProductCard extends Component {
 
@@ -59,16 +60,21 @@ class ProductCard extends Component {
     }
 
   render () {
+
+    const { name, url, image, price, unit } = this.props;
+
     return (
       <CardContainer>
-        <ProductImage src='https://jumbocolombiafood.vteximg.com.br/arquivos/ids/3323095-750-750/20386511-1.jpg' />
+          <Link to={'/producto/'+url}>
+        <ProductImage src={image} />
+        </Link>
         <InfoProductContainer>
           <PriceContainer>
-            <PriceText>$500 COP</PriceText>
-            <MeasurementText>1000 gramos</MeasurementText>
+            <PriceText>{price}</PriceText>
+            <MeasurementText>{unit}</MeasurementText>
           </PriceContainer>
           <ProductName>
-              Papa capira lavada
+              {name}
           </ProductName>
             {this.state.added ? this.renderQuantifier() : this.renderButtonCart()}
         </InfoProductContainer>
