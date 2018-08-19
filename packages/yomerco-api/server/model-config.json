@@ -22,7 +22,7 @@
     "dataSource": "db",
     "public": true
   },
-  "MyRoleMyUser": {
+  "AssinedRole": {
     "dataSource": "db",
     "public": true
   },
@@ -83,6 +83,14 @@
     "public": true
   },
   "Payment": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Parameter": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Permission": {
     "dataSource": "db",
     "public": true
   }

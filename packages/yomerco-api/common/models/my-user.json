@@ -20,16 +20,26 @@
     },
     "email": {
       "type": "string",
-      "required": true
+      "required": true,
+      "index": {
+        "unique": true
+      }
+    },
+    "uidAuth": {
+      "type": "string",
+      "index": true
     }
   },
   "validations": [],
   "relations": {
-    "roles": {
+    "myRoles": {
       "type": "hasMany",
       "model": "MyRole",
       "foreignKey": "userId",
-      "through": "MyRoleMyUser"
+      "options": {
+        "nestRemoting": true
+      },
+      "through": "AssinedRole"
     },
     "addresses": {
       "type": "hasMany",

@@ -28,11 +28,19 @@
   },
   "validations": [],
   "relations": {
-    "users": {
+    "myUsers": {
       "type": "hasMany",
       "model": "MyUser",
       "foreignKey": "roleId",
-      "through": "MyRoleMyUser"
+      "options": {
+        "nestRemoting": true
+      },
+      "through": "AssinedRole"
+    },
+    "permissions": {
+      "type": "hasMany",
+      "model": "Permission",
+      "foreignKey": "roleId"
     }
   },
   "acls": [],

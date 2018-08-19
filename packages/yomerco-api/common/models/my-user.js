@@ -65,6 +65,8 @@ module.exports = function (MyUser) {
       throw error
     }
 
+    let user = await myUserParameter.findById(1)
+    console.log(user)
     return { count: 1 }
   }
 

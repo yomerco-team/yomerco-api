@@ -4,7 +4,7 @@ const ds = app.dataSources.db
 const tables = [
   'MyUser',
   'MyRole',
-  'MyRoleMyUser',
+  'AssinedRole',
   'State',
   'City',
   'Address',
@@ -19,7 +19,9 @@ const tables = [
   'OrderDetail',
   'PaymentMethod',
   'PaymentStatus',
-  'Payment'
+  'Payment',
+  'Parameter',
+  'Permission'
 ]
 
 ds.autoupdate(tables, (err) => {

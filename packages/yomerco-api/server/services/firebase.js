@@ -1,5 +1,5 @@
 const firebaseAdmin = require('firebase-admin')
-const serviceAccountKey = require('./serviceAccountKey')
+const serviceAccountKey = require('./serviceAccountKey.json')
 
 class Firebase {
   constructor () {
@@ -79,6 +79,16 @@ class Firebase {
     }
 
     return Promise.resolve()
+  }
+
+  async verifyIdToken (token) {
+    let userFirebase
+    try {
+      userFirebase = await this.auth.verifyIdToken(token)
+    } catch (error) {
+      throw error
+    }
+    return userFirebase
   }
 }
 
