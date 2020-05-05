@@ -1,1 +1,0 @@
-module.exports = function (/* ProductImage */) {}
