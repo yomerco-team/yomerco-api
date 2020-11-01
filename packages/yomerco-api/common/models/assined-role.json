@@ -1,0 +1,31 @@
+{
+  "name": "AssinedRole",
+  "plural": "assigned-roles",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "myRole": {
+      "type": "belongsTo",
+      "model": "MyRole",
+      "foreignKey": "roleId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "myUser": {
+      "type": "belongsTo",
+      "model": "MyUser",
+      "foreignKey": "userId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

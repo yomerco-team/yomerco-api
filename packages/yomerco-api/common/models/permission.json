@@ -1,0 +1,32 @@
+{
+  "name": "Permission",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "modelName": {
+      "type": "string",
+      "required": true
+    },
+    "httpMethod": {
+      "type": "string",
+      "required": true
+    },
+    "allow": {
+      "type": "boolean",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "rol": {
+      "type": "belongsTo",
+      "model": "MyRole",
+      "foreignKey": "roleId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

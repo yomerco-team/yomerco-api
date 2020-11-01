@@ -1,0 +1,41 @@
+{
+  "name": "Payment",
+  "plural": "payments",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": {
+      "required": false,
+      "validateUpsert": true,
+      "silenceWarnings": true
+    }
+  },
+  "properties": {
+    "uuid": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "status": {
+      "type": "belongsTo",
+      "model": "PaymentStatus",
+      "foreignKey": "statusId"
+    },
+    "order": {
+      "type": "belongsTo",
+      "model": "Order",
+      "foreignKey": "orderId"
+    },
+    "paymentMethod": {
+      "type": "belongsTo",
+      "model": "PaymentMethod",
+      "foreignKey": "paymentMethodId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
