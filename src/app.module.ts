@@ -11,6 +11,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { CommonModule } from './common/common.module';
+import { ReferencesModule } from './modules/references/references.module';
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
@@ -34,7 +35,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
         synchronize: process.env.NODE_ENV !== 'production'
       })
     }),
-    CommonModule
+    CommonModule,
+    ReferencesModule
   ],
   controllers: [AppController],
   providers: [AppService]
