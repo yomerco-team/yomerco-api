@@ -10,6 +10,8 @@ import appConfigSchema from './config/app.config.schema';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+import { CommonModule } from './common/common.module';
+
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
 
@@ -31,7 +33,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
         autoLoadEntities: true,
         synchronize: process.env.NODE_ENV !== 'production'
       })
-    })
+    }),
+    CommonModule
   ],
   controllers: [AppController],
   providers: [AppService]

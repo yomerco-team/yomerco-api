@@ -6,6 +6,8 @@ import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';
 
+import { CustomExceptionFilter } from './common/custom-exception.filter';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -16,6 +18,9 @@ async function bootstrap() {
   app.enableCors();
 
   app.use(helmet());
+
+  // using the filters
+  app.useGlobalFilters(new CustomExceptionFilter());
 
   const PORT = configService.get<number>('config.app.port');
   const ENVIRONMENT = configService.get<string>('config.environment');
