@@ -1,3 +1,5 @@
+import * as helmet from 'helmet';
+
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
@@ -13,6 +15,8 @@ async function bootstrap() {
   // enabling for cors policy
   app.enableCors();
 
+  app.use(helmet());
+
   const PORT = configService.get<number>('config.app.port');
   const ENVIRONMENT = configService.get<string>('config.environment');
 
@@ -20,4 +24,5 @@ async function bootstrap() {
 
   Logger.debug(`server listening at ${PORT} | ${ENVIRONMENT} `, 'main.ts');
 }
+
 bootstrap();
