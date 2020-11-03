@@ -1,10 +1,13 @@
-import { Injectable, PreconditionFailedException } from '@nestjs/common';
+import { Injectable, NotFoundException, PreconditionFailedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Reference } from './reference.entity';
 
 import { CreateInput } from './dto/create-input.dto';
+import { FindAllInput } from './dto/find-all-input.dto';
+import { FindOneInput } from './dto/find-one-input.dto';
+import { UpdateInput } from './dto/update-input.dto';
 
 @Injectable()
 export class ReferencesService {
@@ -28,7 +31,7 @@ export class ReferencesService {
       .where('r.uniqueCode = :uniqueCode', { uniqueCode })
       .getOne();
 
-    if (!existing) {
+    if (existing) {
       throw new PreconditionFailedException(`already exists a reference with uniqueCode ${uniqueCode}.`);
     }
 
@@ -42,6 +45,78 @@ export class ReferencesService {
     });
 
     const saved = await this.referenceRepository.save(created);
+
+    return saved;
+  }
+
+  /**
+   *
+   *
+   * @param {FindAllInput} findAllInput
+   * @return {*}  {Promise<Reference[]>}
+   * @memberof ReferencesService
+   */
+  public async findAll(findAllInput: FindAllInput): Promise<Reference[]> {
+    const { limit = 0, offset = 0 } = findAllInput;
+
+    const query = this.referenceRepository.createQueryBuilder('r')
+      .limit(limit || undefined)
+      .skip(offset)
+      .orderBy('r.id', 'DESC');
+
+    const data = await query.getMany();
+
+    return data;    
+  }
+
+  /**
+   *
+   *
+   * @param {FindOneInput} findOneInput
+   * @return {*}  {Promise<Reference>}
+   * @memberof ReferencesService
+   */
+  public async findOne(findOneInput: FindOneInput): Promise<Reference> {
+    const { uniqueCode } = findOneInput;
+
+    const existing = await this.referenceRepository.createQueryBuilder('r')
+      .where('r.uniqueCode = :uniqueCode', { uniqueCode })
+      .getOne();
+
+    return existing || null;
+  }
+
+  /**
+   *
+   *
+   * @param {FindOneInput} findOneInput
+   * @param {UpdateInput} updateInput
+   * @return {*}  {Promise<Reference>}
+   * @memberof ReferencesService
+   */
+  public async update(findOneInput: FindOneInput, updateInput: UpdateInput): Promise<Reference> {
+    const { uniqueCode } = findOneInput;
+
+    const existing = await this.findOne({ uniqueCode });
+
+    if (!existing) {
+      throw new NotFoundException(`can't get the reference with unique code ${uniqueCode}.`);
+    }
+
+    const { id } = existing;
+
+    const preloaded = await this.referenceRepository.preload({
+      id,
+      ...updateInput
+    });
+
+    const compareTo = await this.findOne({ uniqueCode: preloaded.uniqueCode });
+
+    if (compareTo.id !== preloaded.id) {
+      throw new PreconditionFailedException(`already exists a reference with code ${preloaded.uniqueCode}.`);
+    }
+
+    const saved = await this.referenceRepository.save(preloaded);
 
     return saved;
   }
