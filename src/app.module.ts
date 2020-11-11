@@ -12,6 +12,7 @@ import { AppService } from './app.service';
 
 import { CommonModule } from './common/common.module';
 import { ReferencesModule } from './modules/references/references.module';
+import { ReferenceImagesModule } from './modules/reference-images/reference-images.module';
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
@@ -36,7 +37,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
       })
     }),
     CommonModule,
-    ReferencesModule
+    ReferencesModule,
+    ReferenceImagesModule
   ],
   controllers: [AppController],
   providers: [AppService]
