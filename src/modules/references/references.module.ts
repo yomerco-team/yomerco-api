@@ -10,6 +10,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TypeOrmModule.forFeature([Reference])
   ],
   providers: [ReferencesService],
-  controllers: [ReferencesController]
+  controllers: [ReferencesController],
+  exports: [ReferencesService]
 })
 export class ReferencesModule {}

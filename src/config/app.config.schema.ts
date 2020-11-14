@@ -18,5 +18,7 @@ export default Joi.object({
   GCP_AUTH_URI: Joi.required(),
   GCP_TOKEN_URI: Joi.required(),
   GCP_AUTH_PROVIDER_X509_CERT_URL: Joi.required(),
-  GCP_CLIENT_X509_CERT_URL: Joi.required()
+  GCP_CLIENT_X509_CERT_URL: Joi.required(),
+  GCP_BUCKET_NAME: Joi.required(),
+  GCP_BUCKET_BASE_URL: Joi.required()
 });
