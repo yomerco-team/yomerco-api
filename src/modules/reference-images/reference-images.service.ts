@@ -12,6 +12,7 @@ import { ReferenceImage } from './reference-image.entity';
 import { ReferencesService } from '../references/references.service';
 
 import { CreateInput } from './dto/create-input';
+import { RemoveInput } from './dto/remove-input.dto';
 
 @Injectable()
 export class ReferenceImagesService {
@@ -24,6 +25,14 @@ export class ReferenceImagesService {
     private readonly referencesService: ReferencesService
   ) {}
 
+  /**
+   *
+   *
+   * @param {*} file
+   * @param {CreateInput} createInput
+   * @return {*}  {Promise<ReferenceImage>}
+   * @memberof ReferenceImagesService
+   */
   public async create(file: any, createInput: CreateInput): Promise<ReferenceImage> {
     let filePath = '';
     try {
@@ -85,5 +94,39 @@ export class ReferenceImagesService {
     } finally {
       if (filePath) fs.unlinkSync(filePath);
     }
+  }
+
+  /**
+   *
+   *
+   * @param {RemoveInput} removeInput
+   * @return {*}  {Promise<ReferenceImage>}
+   * @memberof ReferenceImagesService
+   */
+  public async remove(removeInput: RemoveInput): Promise<ReferenceImage> {
+    const { id, referenceUniqueCode } = removeInput;
+
+    const reference = await this.referencesService.findOne({ uniqueCode: referenceUniqueCode });
+
+    if (!reference) {
+      throw new NotFoundException(`can't get the reference with unique code ${referenceUniqueCode}.`);
+    }
+
+    const referenceImage = await this.referenceImageRepository.findOne(id, { where: { reference } });
+
+    if (!referenceImage) {
+      throw new NotFoundException(`can't get the reference image with id ${id}.`);
+    }
+
+    const object = referenceImage.url.replace(this.appConfiguration.gcp.bucketBaseUrl, '');
+
+    await this.storageService.deleteFile({
+      bucketName: this.appConfiguration.gcp.bucketName,
+      object
+    });
+
+    const removed = await this.referenceImageRepository.remove(referenceImage);
+
+    return removed;
   }
 }

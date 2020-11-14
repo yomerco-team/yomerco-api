@@ -1,9 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpStatus, Inject, Injectable, Logger } from '@nestjs/common';
 import { File, Storage } from '@google-cloud/storage';
 import { ConfigType } from '@nestjs/config';
 
 import appConfig from '../../config/app.config';
 import { UploadFileInput } from './dto/upload-file-input.dto';
+import { DeleteFileInput } from './dto/delete-file-input.dto';
 
 @Injectable()
 export class StorageService {
@@ -41,5 +42,29 @@ export class StorageService {
       .upload(sourcePath, options);
 
     return response;
+  }
+
+  /**
+   *
+   *
+   * @param {DeleteFileInput} deleteFileInput
+   * @memberof StorageService
+   */
+  public async deleteFile (deleteFileInput: DeleteFileInput): Promise<void> {
+    const { bucketName, object } = deleteFileInput;
+
+    try {
+      await this.storage
+        .bucket(bucketName)
+        .file(object)
+        .delete();
+      
+      Logger.debug(`file ${object} deleted!`);   
+    } catch (error) {
+      console.error(error);
+      if (error.code !== HttpStatus.NOT_FOUND) {
+        throw error;
+      }
+    }
   }
 }

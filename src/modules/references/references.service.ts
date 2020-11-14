@@ -57,9 +57,10 @@ export class ReferencesService {
    * @memberof ReferencesService
    */
   public async findAll(findAllInput: FindAllInput): Promise<Reference[]> {
-    const { limit = 0, offset = 0 } = findAllInput;
+    const { limit = 10, offset = 0 } = findAllInput;
 
     const query = this.referenceRepository.createQueryBuilder('r')
+      .innerJoinAndSelect('r.referenceImages', 'ri')
       .limit(limit || undefined)
       .skip(offset)
       .orderBy('r.id', 'DESC');
