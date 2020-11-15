@@ -16,6 +16,7 @@ import { ReferenceImagesModule } from './modules/reference-images/reference-imag
 import { CountriesModule } from './modules/countries/countries.module';
 import { StatesModule } from './modules/states/states.module';
 import { CitiesModule } from './modules/cities/cities.module';
+import { LocationsModule } from './modules/locations/locations.module';
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
@@ -44,7 +45,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
     ReferenceImagesModule,
     CountriesModule,
     StatesModule,
-    CitiesModule
+    CitiesModule,
+    LocationsModule
   ],
   controllers: [AppController],
   providers: [AppService]
