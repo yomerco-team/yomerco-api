@@ -13,6 +13,8 @@ import { AppService } from './app.service';
 import { CommonModule } from './common/common.module';
 import { ReferencesModule } from './modules/references/references.module';
 import { ReferenceImagesModule } from './modules/reference-images/reference-images.module';
+import { CountriesModule } from './modules/countries/countries.module';
+import { StatesModule } from './modules/states/states.module';
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
@@ -38,7 +40,9 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
     }),
     CommonModule,
     ReferencesModule,
-    ReferenceImagesModule
+    ReferenceImagesModule,
+    CountriesModule,
+    StatesModule
   ],
   controllers: [AppController],
   providers: [AppService]

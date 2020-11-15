@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Reference } from '../references/reference.entity';
 
 @Entity({ name: 'reference_images' })
@@ -24,5 +24,6 @@ export class ReferenceImage {
 
   @ApiProperty({ type: () => Reference })
   @ManyToOne(type => Reference, reference => reference.referenceImages)
+  @JoinColumn({ name: 'reference_if' })
   reference: Reference;
 }
