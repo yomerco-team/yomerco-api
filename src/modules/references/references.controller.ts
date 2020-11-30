@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 import { ReferencesService } from './references.service';
 
@@ -44,5 +45,17 @@ export class ReferencesController {
   @Patch(':uniqueCode')
   update(@Param() findOneInput: FindOneInput, @Body() updateInput: UpdateInput): Promise<Reference> {
     return this.update(findOneInput, updateInput);
+  }
+
+  @Post('upload-references')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadReferences(@UploadedFile() file): any {
+    // console.log('fie', file);
+
+    // console.log('buffer', file.buffer.toString('utf-8'));
+
+    return {
+      message: 'ok'
+    };
   }
 }

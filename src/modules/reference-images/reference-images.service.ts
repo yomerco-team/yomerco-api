@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { v2 as cloudinary }  from 'cloudinary';
 import { BadRequestException, Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,7 +14,6 @@ import { ReferencesService } from '../references/references.service';
 
 import { CreateInput } from './dto/create-input';
 import { RemoveInput } from './dto/remove-input.dto';
-
 @Injectable()
 export class ReferenceImagesService {
   constructor(
@@ -23,7 +23,13 @@ export class ReferenceImagesService {
     @InjectRepository(ReferenceImage)
     private readonly referenceImageRepository: Repository<ReferenceImage>,
     private readonly referencesService: ReferencesService
-  ) {}
+  ) {
+    cloudinary.config({
+      cloud_name: this.appConfiguration.cloudinary.cloudName,
+      api_key: this.appConfiguration.cloudinary.apiKey,
+      api_secret: this.appConfiguration.cloudinary.apiSecret
+    });
+  }
 
   /**
    *
@@ -33,7 +39,7 @@ export class ReferenceImagesService {
    * @return {*}  {Promise<ReferenceImage>}
    * @memberof ReferenceImagesService
    */
-  public async create(file: any, createInput: CreateInput): Promise<ReferenceImage> {
+  public async create(file: any, createInput: CreateInput): Promise<ReferenceImage[]> {
     let filePath = '';
     try {
       if (!file.mimetype.startsWith('image')) {
@@ -53,7 +59,7 @@ export class ReferenceImagesService {
       // console.log('createInput', createInput);
   
       const basePath = path.resolve(__dirname);
-      const fileExt = file.originalname.split('.').pop();
+      // const fileExt = file.originalname.split('.').pop();
   
       // console.log('basePath', basePath);
       // console.log('fileExt', fileExt);
@@ -62,33 +68,50 @@ export class ReferenceImagesService {
 
       // console.log('filePath', filePath);
   
-      fs.writeFileSync(`${basePath}/${file.originalname}`, file.buffer);
+      fs.writeFileSync(filePath, file.buffer);
 
-      const created = this.referenceImageRepository.create({
-        url: 'pending',
-        reference
+      const cloudinaryResponse = await cloudinary.uploader.upload(filePath, {
+        eager: [
+          { width: 150, height: 150 },
+          { width: 300, height: 300 },
+          { width: 600, height: 600 }
+        ]
       });
 
-      const saved = await this.referenceImageRepository.save(created);
+      const { eager } = cloudinaryResponse;
+      
+      let createdReferenceImages: ReferenceImage[] = [];
 
-      const uploadedFile = await this.storageService.uploadFile({
-        bucketName: this.appConfiguration.gcp.bucketName,
-        sourcePath: filePath,
-        destinationPath: `yomerco/reference-images/${referenceUniqueCode}-${saved.id}.${fileExt}`
-      });
+      for (const item of eager) {
+        let size: string;
 
-      const [makePublicResponse] = await uploadedFile.makePublic();
+        switch (item.width) {
+        case 150:
+          size = 'small';
+          break;
+        case 300:
+          size = 'medium';
+          break;
+        case 600:
+          size = 'large';
+          break;
+        default:
+          size = null;
+          break;
+        }
 
-      const updated = await this.referenceImageRepository.save({
-        ...saved,
-        url: `${this.appConfiguration.gcp.bucketBaseUrl}${makePublicResponse.object}`
-      });
-
-      delete updated.reference;
-
-      // console.log('updated', updated);
+        const created = this.referenceImageRepository.create({
+          url: item.url,
+          size,
+          reference
+        });
   
-      return updated;  
+        const saved = await this.referenceImageRepository.save(created);
+
+        createdReferenceImages = [...createdReferenceImages, saved];
+      }
+  
+      return createdReferenceImages;  
     } catch (error) {
       throw error;
     } finally {

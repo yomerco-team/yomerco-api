@@ -17,11 +17,11 @@ export class ReferenceImagesController {
   @ApiResponse({
     status: 201,
     description: 'response',
-    type: ReferenceImage
+    type: [ReferenceImage]
   })
   @Post(':referenceUniqueCode')
   @UseInterceptors(FileInterceptor('file'))
-  create(@UploadedFile() file, @Param() createInput: CreateInput): Promise<ReferenceImage> {
+  create(@UploadedFile() file, @Param() createInput: CreateInput): Promise<ReferenceImage[]> {
     return this.service.create(file, createInput);
   }
 

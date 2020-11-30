@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { City } from '../cities/city.entity';
 import { Country } from '../countries/country.entity';
 
@@ -24,7 +24,7 @@ export class State {
   // relations
 
   @ApiProperty({ type: () => Country })
-  @ManyToMany(type => Country, country => country.states)
+  @ManyToOne(type => Country, country => country.states)
   @JoinColumn({ name: 'country_id' })
   country: Country;
 

@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
 import { City } from '../cities/city.entity';
+import { Wharehouse } from '../wharehouses/wharehouse.entity';
 
 @Entity({ name: 'locations' })
 export class Location {
@@ -25,11 +27,13 @@ export class Location {
   @CreateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  // relations
-  
+  // relations  
 
   @ApiProperty({ type: () => City })
   @ManyToOne(type => City, city => city.locations)
   @JoinColumn({ name: 'city_id' })
   city: City;
+
+  @OneToMany(type => Wharehouse, wharehouse => wharehouse.location)
+  wharehouses: Wharehouse[];
 }

@@ -13,6 +13,10 @@ export class ReferenceImage {
   url: string;
 
   @ApiProperty()
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  size: string;
+
+  @ApiProperty()
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

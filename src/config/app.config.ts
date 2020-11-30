@@ -26,5 +26,11 @@ export default registerAs('config', () => ({
     clientX509CertUrl: process.env.GCP_CLIENT_X509_CERT_URL,
     bucketName: process.env.GCP_BUCKET_NAME,
     bucketBaseUrl: process.env.GCP_BUCKET_BASE_URL
+  },
+  cloudinary: {
+    url: process.env.CLOUDINARY_URL,
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    apiSecret: process.env.CLOUDINARY_API_SECRET
   }
 }));
