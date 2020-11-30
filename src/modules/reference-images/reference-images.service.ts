@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { v2 as cloudinary }  from 'cloudinary';
-import { BadRequestException, Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, Logger, NotFoundException, PreconditionFailedException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigType } from '@nestjs/config';
@@ -53,6 +53,12 @@ export class ReferenceImagesService {
       if (!reference) {
         throw new NotFoundException(`can't get the reference with unique code ${referenceUniqueCode}.`);
       }
+
+      const referenceImagesNumber = await this.referenceImageRepository.count({ where: { reference }});
+
+      if (referenceImagesNumber >= 9) {
+        throw new PreconditionFailedException(`the reference has ${referenceImagesNumber} images.`);
+      }
       
       // console.log('file', file);
 
@@ -78,7 +84,7 @@ export class ReferenceImagesService {
         ]
       });
 
-      const { eager } = cloudinaryResponse;
+      const { public_id, eager } = cloudinaryResponse;
       
       let createdReferenceImages: ReferenceImage[] = [];
 
@@ -101,6 +107,7 @@ export class ReferenceImagesService {
         }
 
         const created = this.referenceImageRepository.create({
+          cloudId: public_id,
           url: item.url,
           size,
           reference
@@ -126,7 +133,7 @@ export class ReferenceImagesService {
    * @return {*}  {Promise<ReferenceImage>}
    * @memberof ReferenceImagesService
    */
-  public async remove(removeInput: RemoveInput): Promise<ReferenceImage> {
+  public async remove(removeInput: RemoveInput): Promise<any> {
     const { id, referenceUniqueCode } = removeInput;
 
     const reference = await this.referencesService.findOne({ uniqueCode: referenceUniqueCode });
@@ -141,15 +148,16 @@ export class ReferenceImagesService {
       throw new NotFoundException(`can't get the reference image with id ${id}.`);
     }
 
-    const object = referenceImage.url.replace(this.appConfiguration.gcp.bucketBaseUrl, '');
+    const { cloudId } = referenceImage;
 
-    await this.storageService.deleteFile({
-      bucketName: this.appConfiguration.gcp.bucketName,
-      object
-    });
+    if (cloudId) {
+      await this.referenceImageRepository.delete({ cloudId });
+    } else {
+      await this.referenceImageRepository.remove(referenceImage);
+    }
 
-    const removed = await this.referenceImageRepository.remove(referenceImage);
-
-    return removed;
+    return {
+      message: 'ok'
+    };
   }
 }

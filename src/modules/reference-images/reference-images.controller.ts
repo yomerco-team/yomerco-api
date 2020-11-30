@@ -27,11 +27,10 @@ export class ReferenceImagesController {
 
   @ApiResponse({
     status: 200,
-    description: 'response',
-    type: ReferenceImage
+    description: 'response'
   })
   @Delete(':referenceUniqueCode/:id')
-  remove(@Param() removeInput: RemoveInput): Promise<ReferenceImage> {
+  remove(@Param() removeInput: RemoveInput): Promise<any> {
     return this.service.remove(removeInput);
   }
 }

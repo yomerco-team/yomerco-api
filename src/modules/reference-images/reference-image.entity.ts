@@ -17,6 +17,10 @@ export class ReferenceImage {
   size: string;
 
   @ApiProperty()
+  @Column({ name: 'cloud_id', type: 'varchar', length: 20, nullable: true })
+  cloudId: string;
+
+  @ApiProperty()
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
