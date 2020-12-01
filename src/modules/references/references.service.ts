@@ -35,13 +35,12 @@ export class ReferencesService {
       throw new PreconditionFailedException(`already exists a reference with uniqueCode ${uniqueCode}.`);
     }
 
-    const { name, description, imageUrl } = createInput;
+    const { name, description } = createInput;
 
     const created = await this.referenceRepository.create({
       name,
       uniqueCode,
-      description,
-      imageUrl
+      description
     });
 
     const saved = await this.referenceRepository.save(created);

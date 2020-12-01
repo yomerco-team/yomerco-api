@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { v2 as cloudinary }  from 'cloudinary';
-import { BadRequestException, Inject, Injectable, Logger, NotFoundException, PreconditionFailedException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, NotFoundException, PreconditionFailedException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigType } from '@nestjs/config';

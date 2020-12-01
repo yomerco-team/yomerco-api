@@ -1,5 +1,5 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString, IsUrl } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 
 export class CreateInput {
   @ApiProperty()
@@ -13,9 +13,4 @@ export class CreateInput {
   @ApiProperty()
   @IsString()
   readonly description: string;
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsUrl()
-  readonly imageUrl?: string;
 }

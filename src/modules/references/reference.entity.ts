@@ -22,10 +22,6 @@ export class Reference {
     @Column({ type: 'varchar', length: 200 })
     description: string;
 
-    @ApiPropertyOptional()
-    @Column({ type: 'varchar', length: 200, nullable: true })
-    imageUrl?: string;
-
     @ApiProperty()
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
