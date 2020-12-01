@@ -59,7 +59,7 @@ export class ReferencesService {
     const { limit = 10, offset = 0 } = findAllInput;
 
     const query = this.referenceRepository.createQueryBuilder('r')
-      .innerJoinAndSelect('r.referenceImages', 'ri')
+      .leftJoinAndSelect('r.referenceImages', 'ri')
       .limit(limit || undefined)
       .skip(offset)
       .orderBy('r.id', 'DESC');
@@ -119,5 +119,13 @@ export class ReferencesService {
     const saved = await this.referenceRepository.save(preloaded);
 
     return saved;
+  }
+
+  public async uploadReferences(file: any) {
+    // console.log('buffer', file.buffer.toString('utf-8'));
+
+    return {
+      message: 'ok'
+    };
   }
 }

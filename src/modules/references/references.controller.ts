@@ -50,12 +50,6 @@ export class ReferencesController {
   @Post('upload-references')
   @UseInterceptors(FileInterceptor('file'))
   uploadReferences(@UploadedFile() file): any {
-    // console.log('fie', file);
-
-    // console.log('buffer', file.buffer.toString('utf-8'));
-
-    return {
-      message: 'ok'
-    };
+    return this.service.uploadReferences(file);
   }
 }
