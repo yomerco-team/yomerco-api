@@ -96,13 +96,23 @@ export class ReferencesService {
    * @memberof ReferencesService
    */
   public async findAll(findAllInput: FindAllInput): Promise<Reference[]> {
-    const { limit = 10, offset = 0 } = findAllInput;
+    const { limit = 10, offset = 0, cityId } = findAllInput;
 
-    const query = this.referenceRepository.createQueryBuilder('r')
+    let query = this.referenceRepository.createQueryBuilder('r')
       .leftJoinAndSelect('r.referenceImages', 'ri')
-      .limit(limit || undefined)
+      .leftJoinAndSelect('r.referencePrices', 'rp');
+
+    if (cityId) {
+      query = query.where('rp.city_id = :cityId', { cityId });
+    }
+    
+    query = query.limit(limit || undefined)
       .skip(offset)
       .orderBy('r.id', 'DESC');
+
+    // const sql = query.getSql();
+
+    // console.log('sql', sql);
 
     const data = await query.getMany();
 
