@@ -1,8 +1,10 @@
-import { Injectable, NotFoundException, PreconditionFailedException } from '@nestjs/common';
+import { BadRequestException, forwardRef, Inject, Injectable, NotFoundException, PreconditionFailedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Reference } from './reference.entity';
+
+import { ReferenceImagesService } from '../reference-images/reference-images.service';
 
 import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
@@ -13,7 +15,9 @@ import { UpdateInput } from './dto/update-input.dto';
 export class ReferencesService {
   constructor(
         @InjectRepository(Reference)
-        private readonly referenceRepository: Repository<Reference>
+        private readonly referenceRepository: Repository<Reference>,
+        @Inject(forwardRef(() => ReferenceImagesService))
+        private readonly referenceImagesService: ReferenceImagesService
   ) {}
 
   /**
@@ -121,8 +125,54 @@ export class ReferencesService {
     return saved;
   }
 
-  public async uploadReferences(file: any) {
-    // console.log('buffer', file.buffer.toString('utf-8'));
+  public async uploadReferences(file: any): Promise<any> {
+    const fileContent: string = file.buffer.toString('utf-8');
+
+    let lines = fileContent.split('\r\n');
+
+    if (lines.length <= 1) {
+      lines = fileContent.split('\n');
+    }
+
+    if (lines.length <= 1) {
+      throw new BadRequestException('empty file.');
+    }
+
+    lines = lines.slice(1);
+
+    for (const line of lines) {
+      const array = line.split(';');
+
+      const uniqueCode = array[0];
+      const name = array[1];
+      const description = array[2];
+      const imageOne = array[3];
+      const imageTwo = array[4];
+      const imageThree = array[5];
+
+      if (!uniqueCode || !name) {
+        continue;
+      }
+
+      let reference = await this.findOne({ uniqueCode });
+
+      if (!reference) {
+        reference = await this.create({
+          uniqueCode,
+          name,
+          description
+        });
+      }
+
+      // console.log('reference', reference);
+
+      if (imageOne) {
+        await this.referenceImagesService.createFromUrl({
+          referenceUniqueCode: reference.uniqueCode,
+          url: imageOne
+        });
+      }
+    }
 
     return {
       message: 'ok'

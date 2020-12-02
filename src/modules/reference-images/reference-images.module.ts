@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, HttpModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
@@ -16,9 +16,11 @@ import appConfig from '../../config/app.config';
     ConfigModule.forFeature(appConfig),
     StorageModule,
     TypeOrmModule.forFeature([ReferenceImage]),
-    ReferencesModule
+    forwardRef(() => ReferencesModule),
+    HttpModule
   ],
   providers: [ReferenceImagesService],
-  controllers: [ReferenceImagesController]
+  controllers: [ReferenceImagesController],
+  exports: [ReferenceImagesService]
 })
 export class ReferenceImagesModule {}

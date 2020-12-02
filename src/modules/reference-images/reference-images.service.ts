@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { v2 as cloudinary }  from 'cloudinary';
-import { BadRequestException, Inject, Injectable, NotFoundException, PreconditionFailedException } from '@nestjs/common';
+import { BadRequestException, forwardRef, HttpService, Inject, Injectable, NotFoundException, PreconditionFailedException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigType } from '@nestjs/config';
@@ -14,6 +14,7 @@ import { ReferencesService } from '../references/references.service';
 
 import { CreateInput } from './dto/create-input';
 import { RemoveInput } from './dto/remove-input.dto';
+import { CreateFromUrlInput } from '../references/dto/create-from-url-input.dto';
 @Injectable()
 export class ReferenceImagesService {
   constructor(
@@ -22,7 +23,9 @@ export class ReferenceImagesService {
     private readonly storageService: StorageService,
     @InjectRepository(ReferenceImage)
     private readonly referenceImageRepository: Repository<ReferenceImage>,
-    private readonly referencesService: ReferencesService
+    @Inject(forwardRef(() => ReferencesService))
+    private readonly referencesService: ReferencesService,
+    private readonly httpService: HttpService
   ) {
     cloudinary.config({
       cloud_name: this.appConfiguration.cloudinary.cloudName,
@@ -159,5 +162,16 @@ export class ReferenceImagesService {
     return {
       message: 'ok'
     };
+  }
+
+  public async createFromUrl(createFromUrlInput: CreateFromUrlInput) {
+    const { url } = createFromUrlInput;
+
+    const result = await this.httpService.axiosRef({
+      url
+    });
+
+    const buffer = result.data;
+    const mimetype = result.headers['content-type'];
   }
 }
