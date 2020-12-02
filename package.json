@@ -33,7 +33,7 @@
     "class-transformer": "0.3.1",
     "class-validator": "0.12.2",
     "cloudinary": "1.23.0",
-    "cross-env": "7.0.2",
+    "cross-env": "7.0.3",
     "helmet": "4.2.0",
     "joi": "17.3.0",
     "pg": "8.5.1",
