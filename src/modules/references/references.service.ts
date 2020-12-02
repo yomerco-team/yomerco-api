@@ -5,11 +5,13 @@ import { Repository } from 'typeorm';
 import { Reference } from './reference.entity';
 
 import { ReferenceImagesService } from '../reference-images/reference-images.service';
+import { ReferencePricesService } from '../reference-prices/reference-prices.service';
 
 import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
 import { FindOneInput } from './dto/find-one-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
+import { CitiesService } from '../cities/cities.service';
 
 @Injectable()
 export class ReferencesService {
@@ -17,7 +19,9 @@ export class ReferencesService {
         @InjectRepository(Reference)
         private readonly referenceRepository: Repository<Reference>,
         @Inject(forwardRef(() => ReferenceImagesService))
-        private readonly referenceImagesService: ReferenceImagesService
+        private readonly referenceImagesService: ReferenceImagesService,
+        private readonly referencePricesService: ReferencePricesService,
+        private readonly citiesService: CitiesService
   ) {}
 
   /**
@@ -30,6 +34,7 @@ export class ReferencesService {
   public async create(createInput: CreateInput): Promise<Reference> {
     const { uniqueCode } = createInput;
 
+    // check the existing reference
     const existing = await this.referenceRepository
       .createQueryBuilder('r')
       .where('r.uniqueCode = :uniqueCode', { uniqueCode })
@@ -39,17 +44,48 @@ export class ReferencesService {
       throw new PreconditionFailedException(`already exists a reference with uniqueCode ${uniqueCode}.`);
     }
 
+    const { cityId } = createInput;
+
+    // check the city
+    const city = await this.citiesService.findOne({ id: cityId });
+
+    if (!city) {
+      throw new NotFoundException(`can't get the city with id ${cityId}.`);
+    }
+
     const { name, description } = createInput;
 
-    const created = await this.referenceRepository.create({
+    const createdReference = await this.referenceRepository.create({
       name,
       uniqueCode,
       description
     });
 
-    const saved = await this.referenceRepository.save(created);
+    const savedReference = await this.referenceRepository.save(createdReference);
 
-    return saved;
+    const {
+      desiredMarginPercentage,
+      discountPercentage,
+      discountValue
+    } = createInput;
+
+    await this.referencePricesService.createFromReference({
+      city,
+      reference: savedReference,
+      desiredMarginPercentage,
+      discountPercentage,
+      discountValue
+    });
+
+    const referenceForResult = await this.referenceRepository.findOne(
+      savedReference.id,
+      {
+        relations: ['referenceImages', 'referencePrices']
+      }
+    );
+
+
+    return referenceForResult;
   }
 
   /**
@@ -154,14 +190,10 @@ export class ReferencesService {
         continue;
       }
 
-      let reference = await this.findOne({ uniqueCode });
+      const reference = await this.findOne({ uniqueCode });
 
       if (!reference) {
-        reference = await this.create({
-          uniqueCode,
-          name,
-          description
-        });
+        continue;
       }
 
       // console.log('reference', reference);

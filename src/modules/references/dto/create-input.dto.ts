@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateInput {
   @ApiProperty()
@@ -13,4 +13,22 @@ export class CreateInput {
   @ApiProperty()
   @IsString()
   readonly description: string;
+
+  @ApiProperty()
+  @IsNumber()
+  readonly cityId: number;
+
+  @ApiProperty()
+  @IsNumber()
+  readonly desiredMarginPercentage: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsNumber()
+  readonly discountValue?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsNumber()
+  readonly discountPercentage?: number;
 }

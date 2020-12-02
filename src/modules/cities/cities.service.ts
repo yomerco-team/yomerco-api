@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { City } from './city.entity';
+import { FindOneInput } from './dto/find-one-input.dto';
 
 @Injectable()
 export class CitiesService {
@@ -9,4 +11,12 @@ export class CitiesService {
     @InjectRepository(City)
     private readonly cityRepository: Repository<City>
   ) {}
+
+  public async findOne(findOneInput: FindOneInput): Promise<City | null> {
+    const { id } = findOneInput;
+
+    const city = await this.cityRepository.findOne(id);
+
+    return city || null;
+  }
 }

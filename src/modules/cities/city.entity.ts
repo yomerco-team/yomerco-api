@@ -3,6 +3,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, Pri
 
 import { State } from '../states/state.entity';
 import { Location } from '../locations/location.entity';
+import { ReferencePrice } from '../reference-prices/reference-price.entity';
 
 @Entity({ name: 'cities' })
 export class City {
@@ -31,4 +32,7 @@ export class City {
 
   @OneToMany(type => Location, location => location.city)
   locations: Location[];
+
+  @OneToMany(type => ReferencePrice, referencePrice => referencePrice.city)
+  referencePrices: ReferencePrice[];
 }
