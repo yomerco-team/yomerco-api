@@ -192,18 +192,38 @@ export class ReferencesService {
       const uniqueCode = array[0];
       const name = array[1];
       const description = array[2];
+      const cityName = array[3];
+      const desiredMarginPercentage = array[4] ? parseInt(array[4], 10) : 0;
+      const discountValue = array[5] ? parseFloat(array[5]) : null;
+      const discountPercentage = array[6] ? parseInt(array[6], 10) : null;
       const imageOne = array[3];
       const imageTwo = array[4];
       const imageThree = array[5];
 
       if (!uniqueCode || !name) {
+        // TODO: keep the error
         continue;
       }
 
-      const reference = await this.findOne({ uniqueCode });
+      const city = await this.citiesService.getOneByName({ name: cityName });
+
+      if (!city) {
+        // TODO: keep the error
+        continue;
+      }
+
+      let reference = await this.findOne({ uniqueCode });
 
       if (!reference) {
-        continue;
+        reference = await this.create({
+          cityId: 1,
+          description,
+          desiredMarginPercentage,
+          name,
+          uniqueCode,
+          discountPercentage,
+          discountValue
+        });
       }
 
       // console.log('reference', reference);
@@ -212,6 +232,20 @@ export class ReferencesService {
         await this.referenceImagesService.createFromUrl({
           referenceUniqueCode: reference.uniqueCode,
           url: imageOne
+        });
+      }
+
+      if (imageTwo) {
+        await this.referenceImagesService.createFromUrl({
+          referenceUniqueCode: reference.uniqueCode,
+          url: imageTwo
+        });
+      }
+
+      if (imageThree) {
+        await this.referenceImagesService.createFromUrl({
+          referenceUniqueCode: reference.uniqueCode,
+          url: imageThree
         });
       }
     }
