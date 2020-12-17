@@ -111,7 +111,7 @@ export class ReferenceImagesService {
 
         const created = this.referenceImageRepository.create({
           cloudId: public_id,
-          url: item.url,
+          url: item.secure_url,
           size,
           reference
         });
@@ -164,14 +164,26 @@ export class ReferenceImagesService {
     };
   }
 
-  public async createFromUrl(createFromUrlInput: CreateFromUrlInput) {
-    const { url } = createFromUrlInput;
+  public async createFromUrl(createFromUrlInput: CreateFromUrlInput): Promise<ReferenceImage[]> {
+    const { url, referenceUniqueCode } = createFromUrlInput;
 
     const result = await this.httpService.axiosRef({
-      url
+      url,
+      responseType: 'arraybuffer'
     });
 
     const buffer = result.data;
     const mimetype = result.headers['content-type'];
+    const originalname = `${referenceUniqueCode}.${mimetype.split('/')[1]}`;
+
+    const file = {
+      buffer,
+      mimetype,
+      originalname
+    };
+
+    const createdReferenceImages = await this.create(file, { referenceUniqueCode });
+
+    return createdReferenceImages;
   }
 }

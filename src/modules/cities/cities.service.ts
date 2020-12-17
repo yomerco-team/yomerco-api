@@ -26,7 +26,7 @@ export class CitiesService {
     const { name } = getOneByNameInput;
 
     const city = await this.cityRepository.createQueryBuilder('c')
-      .where('c.name = :=name', { name })
+      .where('c.name = :name', { name })
       .getOne();
 
     return city || null;

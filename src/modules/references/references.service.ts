@@ -1,4 +1,4 @@
-import { BadRequestException, forwardRef, Inject, Injectable, NotFoundException, PreconditionFailedException } from '@nestjs/common';
+import { BadRequestException, forwardRef, Inject, Injectable, Logger, NotFoundException, PreconditionFailedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -172,86 +172,88 @@ export class ReferencesService {
   }
 
   public async uploadReferences(file: any): Promise<any> {
-    const fileContent: string = file.buffer.toString('utf-8');
+    (async () => {
+      const fileContent: string = file.buffer.toString('utf-8');
 
-    let lines = fileContent.split('\r\n');
+      let lines = fileContent.split('\r\n');
 
-    if (lines.length <= 1) {
-      lines = fileContent.split('\n');
-    }
-
-    if (lines.length <= 1) {
-      throw new BadRequestException('empty file.');
-    }
-
-    lines = lines.slice(1);
-
-    for (const line of lines) {
-      const array = line.split(';');
-
-      const uniqueCode = array[0];
-      const name = array[1];
-      const description = array[2];
-      const cityName = array[3];
-      const desiredMarginPercentage = array[4] ? parseInt(array[4], 10) : 0;
-      const discountValue = array[5] ? parseFloat(array[5]) : null;
-      const discountPercentage = array[6] ? parseInt(array[6], 10) : null;
-      const imageOne = array[3];
-      const imageTwo = array[4];
-      const imageThree = array[5];
-
-      if (!uniqueCode || !name) {
-        // TODO: keep the error
-        continue;
+      if (lines.length <= 1) {
+        lines = fileContent.split('\n');
       }
 
-      const city = await this.citiesService.getOneByName({ name: cityName });
-
-      if (!city) {
-        // TODO: keep the error
-        continue;
+      if (lines.length <= 1) {
+        throw new BadRequestException('empty file.');
       }
 
-      let reference = await this.findOne({ uniqueCode });
+      lines = lines.slice(1);
 
-      if (!reference) {
-        reference = await this.create({
-          cityId: 1,
-          description,
-          desiredMarginPercentage,
-          name,
-          uniqueCode,
-          discountPercentage,
-          discountValue
-        });
+      for (const line of lines) {
+        const array = line.split(';');
+
+        const uniqueCode = array[0];
+        const name = array[1];
+        const description = array[2];
+        const cityName = array[3];
+        const desiredMarginPercentage = array[4] ? parseInt(array[4], 10) : 0;
+        const discountValue = array[5] ? parseFloat(array[5]) : null;
+        const discountPercentage = array[6] ? parseInt(array[6], 10) : null;
+        const imageOne = array[7];
+        const imageTwo = array[8];
+        const imageThree = array[9];
+
+        if (!uniqueCode || !name) {
+          console.error('unique code or name has falsy values');
+          continue;
+        }
+
+        const city = await this.citiesService.getOneByName({ name: cityName });
+
+        if (!city) {
+          console.error('can not get the city');
+          continue;
+        }
+
+        let reference = await this.findOne({ uniqueCode });
+
+        if (!reference) {
+          reference = await this.create({
+            cityId: city.id,
+            description,
+            desiredMarginPercentage,
+            name,
+            uniqueCode,
+            discountPercentage,
+            discountValue
+          });
+        }
+
+        if (imageOne) {
+          await this.referenceImagesService.createFromUrl({
+            referenceUniqueCode: reference.uniqueCode,
+            url: imageOne
+          });
+        }
+
+        if (imageTwo) {
+          await this.referenceImagesService.createFromUrl({
+            referenceUniqueCode: reference.uniqueCode,
+            url: imageTwo
+          });
+        }
+
+        if (imageThree) {
+          await this.referenceImagesService.createFromUrl({
+            referenceUniqueCode: reference.uniqueCode,
+            url: imageThree
+          });
+        }
       }
 
-      // console.log('reference', reference);
-
-      if (imageOne) {
-        await this.referenceImagesService.createFromUrl({
-          referenceUniqueCode: reference.uniqueCode,
-          url: imageOne
-        });
-      }
-
-      if (imageTwo) {
-        await this.referenceImagesService.createFromUrl({
-          referenceUniqueCode: reference.uniqueCode,
-          url: imageTwo
-        });
-      }
-
-      if (imageThree) {
-        await this.referenceImagesService.createFromUrl({
-          referenceUniqueCode: reference.uniqueCode,
-          url: imageThree
-        });
-      }
-    }
+    })()
+      .catch(err => Logger.error(err));
 
     return {
-      message: 'ok'
+      message: 'processing the file.'
     };
   }
 }
