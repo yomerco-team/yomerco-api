@@ -19,6 +19,7 @@ import { CitiesModule } from './modules/cities/cities.module';
 import { LocationsModule } from './modules/locations/locations.module';
 import { WharehousesModule } from './modules/wharehouses/wharehouses.module';
 import { ReferencePricesModule } from './modules/reference-prices/reference-prices.module';
+import { CategoriesModule } from './modules/categories/categories.module';
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
@@ -50,7 +51,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
     CitiesModule,
     LocationsModule,
     WharehousesModule,
-    ReferencePricesModule
+    ReferencePricesModule,
+    CategoriesModule
   ],
   controllers: [AppController],
   providers: [AppService]
