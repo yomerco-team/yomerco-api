@@ -34,6 +34,7 @@ export class Location {
   @JoinColumn({ name: 'city_id' })
   city: City;
 
+  @ApiProperty({ type: () => [Wharehouse] })
   @OneToMany(type => Wharehouse, wharehouse => wharehouse.location)
   wharehouses: Wharehouse[];
 }

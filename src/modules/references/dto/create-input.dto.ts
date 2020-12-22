@@ -31,4 +31,9 @@ export class CreateInput {
   @IsOptional()
   @IsNumber()
   readonly discountPercentage?: number;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  readonly subCategoryName?: string;
 }

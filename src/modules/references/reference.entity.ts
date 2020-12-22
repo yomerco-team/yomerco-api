@@ -1,8 +1,9 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
 import { ReferenceImage } from '../reference-images/reference-image.entity';
 import { ReferencePrice } from '../reference-prices/reference-price.entity';
+import { SubCategory } from '../sub-categories/sub-category.entity';
 
 @Entity({ name: 'references' })
 @Unique('uk_reference_unique_code', ['uniqueCode'])
@@ -39,4 +40,9 @@ export class Reference {
     @ApiProperty({ type: () => [ReferencePrice] })
     @OneToMany(type => ReferencePrice, referencePrice => referencePrice.reference)
     referencePrices: ReferencePrice;
+
+    @ApiProperty({ type: () => SubCategory })
+    @ManyToOne(type => SubCategory, subCategory => subCategory.references, { nullable: true })
+    @JoinColumn({ name: 'sub_category_id' })
+    subCategory: SubCategory;
 }

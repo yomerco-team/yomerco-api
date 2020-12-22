@@ -1,4 +1,12 @@
-import { BadRequestException, forwardRef, Inject, Injectable, Logger, NotFoundException, PreconditionFailedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  forwardRef,
+  Inject, 
+  Injectable, 
+  Logger, 
+  NotFoundException, 
+  PreconditionFailedException
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -6,6 +14,7 @@ import { Reference } from './reference.entity';
 
 import { ReferenceImagesService } from '../reference-images/reference-images.service';
 import { ReferencePricesService } from '../reference-prices/reference-prices.service';
+import { SubCategoriesService } from '../sub-categories/sub-categories.service';
 
 import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
@@ -21,7 +30,8 @@ export class ReferencesService {
         @Inject(forwardRef(() => ReferenceImagesService))
         private readonly referenceImagesService: ReferenceImagesService,
         private readonly referencePricesService: ReferencePricesService,
-        private readonly citiesService: CitiesService
+        private readonly citiesService: CitiesService,
+        private readonly subCategoriesService: SubCategoriesService
   ) {}
 
   /**
@@ -44,14 +54,29 @@ export class ReferencesService {
       throw new PreconditionFailedException(`already exists a reference with uniqueCode ${uniqueCode}.`);
     }
 
+    // check the city
     const { cityId } = createInput;
 
-    // check the city
     const city = await this.citiesService.findOne({ id: cityId });
 
     if (!city) {
       throw new NotFoundException(`can't get the city with id ${cityId}.`);
     }
+
+    // check the sub category
+    const { subCategoryName } = createInput;
+
+    let subCategory;
+
+    if (subCategoryName) {
+      subCategory = await this.subCategoriesService.getByName({ name: subCategoryName });
+
+      if (!subCategory) {
+        throw new NotFoundException(`can't get the sub category ${subCategoryName}.`);
+      }
+    }
+
+    // TODO: get the default sub category to associate the reference
 
     const { name, description } = createInput;
 

@@ -9,13 +9,15 @@ import { Reference } from './reference.entity';
 import { ReferenceImagesModule } from '../reference-images/reference-images.module';
 import { ReferencePricesModule } from '../reference-prices/reference-prices.module';
 import { CitiesModule } from '../cities/cities.module';
+import { SubCategoriesModule } from '../sub-categories/sub-categories.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Reference]),
     forwardRef(() => ReferenceImagesModule),
     ReferencePricesModule,
-    CitiesModule
+    CitiesModule,
+    SubCategoriesModule
   ],
   providers: [ReferencesService],
   controllers: [ReferencesController],
