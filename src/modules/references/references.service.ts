@@ -125,7 +125,9 @@ export class ReferencesService {
 
     let query = this.referenceRepository.createQueryBuilder('r')
       .leftJoinAndSelect('r.referenceImages', 'ri')
-      .leftJoinAndSelect('r.referencePrices', 'rp');
+      .leftJoinAndSelect('r.referencePrices', 'rp')
+      .leftJoinAndSelect('r.subCategory', 'sc')
+      .leftJoinAndSelect('sc.category', 'c');
 
     if (cityId) {
       query = query.where('rp.city_id = :cityId', { cityId });
