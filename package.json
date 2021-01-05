@@ -34,7 +34,7 @@
     "class-validator": "0.12.2",
     "cloudinary": "1.23.0",
     "cross-env": "7.0.3",
-    "helmet": "4.2.0",
+    "helmet": "4.3.1",
     "joi": "17.3.0",
     "pg": "8.5.1",
     "reflect-metadata": "0.1.13",
