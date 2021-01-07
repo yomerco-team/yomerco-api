@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from 'typeorm';
 
 import { ReferenceImage } from '../reference-images/reference-image.entity';
 import { ReferencePrice } from '../reference-prices/reference-price.entity';
@@ -28,8 +28,8 @@ export class Reference {
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
 
-    @ApiProperty()
-    @CreateDateColumn({ name: 'updated_at' })
+    @ApiPropertyOptional()
+    @UpdateDateColumn({ name: 'updated_at' })
     updatedAt: Date;
 
     // relations

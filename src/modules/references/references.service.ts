@@ -76,7 +76,10 @@ export class ReferencesService {
       }
     }
 
-    // TODO: get the default sub category to associate the reference
+    if (!subCategory) {
+      // TODO: use a parameter
+      subCategory = await this.subCategoriesService.getByName({ name: 'Por Categorizar' });
+    }
 
     const { name, description } = createInput;
 
