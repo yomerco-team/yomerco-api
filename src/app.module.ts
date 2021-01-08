@@ -22,6 +22,7 @@ import { ReferencePricesModule } from './modules/reference-prices/reference-pric
 import { CategoriesModule } from './modules/categories/categories.module';
 import { SubCategoriesModule } from './modules/sub-categories/sub-categories.module';
 import { ParametersModule } from './modules/parameters/parameters.module';
+import { ProductProvidersModule } from './modules/product-providers/product-providers.module';
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
@@ -42,7 +43,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE_NAME,
         autoLoadEntities: true,
-        synchronize: process.env.NODE_ENV !== 'production'
+        // synchronize: process.env.NODE_ENV !== 'production'
+        synchronize: false
       })
     }),
     CommonModule,
@@ -56,7 +58,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
     ReferencePricesModule,
     CategoriesModule,
     SubCategoriesModule,
-    ParametersModule
+    ParametersModule,
+    ProductProvidersModule
   ],
   controllers: [AppController],
   providers: [AppService]

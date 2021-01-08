@@ -3,7 +3,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
-const envPath = path.resolve(__dirname, `../../.env.${NODE_ENV}`);
+const envPath = path.resolve(__dirname, `.env.${NODE_ENV}`);
 
 dotenv.config({ path: envPath });
 
