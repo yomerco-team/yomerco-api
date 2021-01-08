@@ -15,12 +15,13 @@ import { Reference } from './reference.entity';
 import { ReferenceImagesService } from '../reference-images/reference-images.service';
 import { ReferencePricesService } from '../reference-prices/reference-prices.service';
 import { SubCategoriesService } from '../sub-categories/sub-categories.service';
+import { CitiesService } from '../cities/cities.service';
+import { ParametersService } from '../parameters/parameters.service';
 
 import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
 import { FindOneInput } from './dto/find-one-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
-import { CitiesService } from '../cities/cities.service';
 
 @Injectable()
 export class ReferencesService {
@@ -31,7 +32,8 @@ export class ReferencesService {
         private readonly referenceImagesService: ReferenceImagesService,
         private readonly referencePricesService: ReferencePricesService,
         private readonly citiesService: CitiesService,
-        private readonly subCategoriesService: SubCategoriesService
+        private readonly subCategoriesService: SubCategoriesService,
+        private readonly parametersService: ParametersService
   ) {}
 
   /**
@@ -77,8 +79,9 @@ export class ReferencesService {
     }
 
     if (!subCategory) {
-      // TODO: use a parameter
-      subCategory = await this.subCategoriesService.getByName({ name: 'Por Categorizar' });
+      const defaultSubCategoryName = await this.parametersService.getParameterValue({ name: 'DEFAULT_SUB_CATEGORY_NAME' });
+
+      subCategory = await this.subCategoriesService.getByName({ name: defaultSubCategoryName });
     }
 
     const { name, description } = createInput;

@@ -10,6 +10,7 @@ import { ReferenceImagesModule } from '../reference-images/reference-images.modu
 import { ReferencePricesModule } from '../reference-prices/reference-prices.module';
 import { CitiesModule } from '../cities/cities.module';
 import { SubCategoriesModule } from '../sub-categories/sub-categories.module';
+import { ParametersModule } from '../parameters/parameters.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { SubCategoriesModule } from '../sub-categories/sub-categories.module';
     forwardRef(() => ReferenceImagesModule),
     ReferencePricesModule,
     CitiesModule,
-    SubCategoriesModule
+    SubCategoriesModule,
+    ParametersModule
   ],
   providers: [ReferencesService],
   controllers: [ReferencesController],
