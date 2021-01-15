@@ -32,6 +32,7 @@ export class ReferenceImage {
 
   @ApiProperty({ type: () => Reference })
   @ManyToOne(type => Reference, reference => reference.referenceImages)
+  // TODO: fix this name
   @JoinColumn({ name: 'reference_if' })
   reference: Reference;
 }

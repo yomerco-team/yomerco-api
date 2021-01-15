@@ -23,6 +23,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { SubCategoriesModule } from './modules/sub-categories/sub-categories.module';
 import { ParametersModule } from './modules/parameters/parameters.module';
 import { ProductProvidersModule } from './modules/product-providers/product-providers.module';
+import { ReferencesInWharehousesModule } from './modules/references-in-wharehouses/references-in-wharehouses.module';
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
@@ -59,7 +60,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
     CategoriesModule,
     SubCategoriesModule,
     ParametersModule,
-    ProductProvidersModule
+    ProductProvidersModule,
+    ReferencesInWharehousesModule
   ],
   controllers: [AppController],
   providers: [AppService]

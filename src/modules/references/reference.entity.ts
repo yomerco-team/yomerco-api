@@ -3,6 +3,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, Pri
 
 import { ReferenceImage } from '../reference-images/reference-image.entity';
 import { ReferencePrice } from '../reference-prices/reference-price.entity';
+import { ReferenceInWharehouse } from '../references-in-wharehouses/reference-in-wharehouse.entity';
 import { SubCategory } from '../sub-categories/sub-category.entity';
 
 @Entity({ name: 'references' })
@@ -45,4 +46,8 @@ export class Reference {
     @ManyToOne(type => SubCategory, subCategory => subCategory.references, { nullable: true })
     @JoinColumn({ name: 'sub_category_id' })
     subCategory: SubCategory;
+
+    @ApiProperty({ type: () => ReferenceInWharehouse })
+    @OneToMany(type => ReferenceInWharehouse, referenceInWharehouse => referenceInWharehouse.wharehouse)
+    referencesInWharehouse: ReferenceInWharehouse;
 }
