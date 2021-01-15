@@ -9,7 +9,7 @@ import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
 import { FindOneInput } from './dto/find-one-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
-@ApiTags('references')
+@ApiTags('product-providers')
 @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
 @Controller('product-providers')
 export class ProductProvidersController {
