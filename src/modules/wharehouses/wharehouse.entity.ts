@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { InventoryEntry } from '../inventory-entries/inventory-entry.entity';
 import { Location } from '../locations/location.entity';
 import { ReferenceInWharehouse } from '../references-in-wharehouses/reference-in-wharehouse.entity';
 
@@ -29,7 +30,11 @@ export class Wharehouse {
   @JoinColumn({ name: 'location_id' })
   location: Location;
 
-  @ApiProperty({ type: () => ReferenceInWharehouse })
+  @ApiProperty({ type: () => [ReferenceInWharehouse] })
   @OneToMany(type => ReferenceInWharehouse, referenceInWharehouse => referenceInWharehouse.wharehouse)
   referencesInWharehouse: ReferenceInWharehouse;
+
+  @ApiProperty({ type: () => [InventoryEntry] })
+  @OneToMany(type => InventoryEntry, inventoryEntry => inventoryEntry.wharehouse)
+  inventoryEntries: InventoryEntry[];
 }

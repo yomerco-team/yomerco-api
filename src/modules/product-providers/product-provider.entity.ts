@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { InventoryEntry } from '../inventory-entries/inventory-entry.entity';
 
 @Entity({ name: 'product_providers' })
 export class ProductProvider {
@@ -34,4 +35,9 @@ export class ProductProvider {
   @ApiPropertyOptional()
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  // relations
+  @ApiProperty({ type: () => [InventoryEntry]})
+  @OneToMany(type => InventoryEntry, inventoryEntry => inventoryEntry.productProvider)
+  inventoryEntries: InventoryEntry[];
 }
