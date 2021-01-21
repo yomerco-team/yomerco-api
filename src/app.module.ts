@@ -25,6 +25,7 @@ import { ParametersModule } from './modules/parameters/parameters.module';
 import { ProductProvidersModule } from './modules/product-providers/product-providers.module';
 import { ReferencesInWharehousesModule } from './modules/references-in-wharehouses/references-in-wharehouses.module';
 import { InventoryEntriesModule } from './modules/inventory-entries/inventory-entries.module';
+import { InventoryEntryDetailsModule } from './modules/inventory-entry-details/inventory-entry-details.module';
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
@@ -45,8 +46,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE_NAME,
         autoLoadEntities: true,
-        // synchronize: process.env.NODE_ENV !== 'production'
-        synchronize: false
+        synchronize: process.env.NODE_ENV !== 'production'
+        // synchronize: false
       })
     }),
     CommonModule,
@@ -63,7 +64,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
     ParametersModule,
     ProductProvidersModule,
     ReferencesInWharehousesModule,
-    InventoryEntriesModule
+    InventoryEntriesModule,
+    InventoryEntryDetailsModule
   ],
   controllers: [AppController],
   providers: [AppService]

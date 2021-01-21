@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from 'typeorm';
+import { InventoryEntryDetail } from '../inventory-entry-details/inventory-entry-detail.entity';
 
 import { ReferenceImage } from '../reference-images/reference-image.entity';
 import { ReferencePrice } from '../reference-prices/reference-price.entity';
@@ -47,7 +48,15 @@ export class Reference {
     @JoinColumn({ name: 'sub_category_id' })
     subCategory: SubCategory;
 
-    @ApiProperty({ type: () => ReferenceInWharehouse })
+    @ApiProperty({ type: () => [ReferenceInWharehouse] })
     @OneToMany(type => ReferenceInWharehouse, referenceInWharehouse => referenceInWharehouse.wharehouse)
-    referencesInWharehouse: ReferenceInWharehouse;
+    referencesInWharehouse: ReferenceInWharehouse[];
+
+    @ApiProperty({ type: () => [InventoryEntryDetail] })
+    @OneToMany(type => InventoryEntryDetail, inventoryEntryDetail => inventoryEntryDetail.buyReference)
+    buyReferenceInventoryEntryDetails: InventoryEntryDetail[];
+    
+    @ApiProperty({ type: () => [InventoryEntryDetail] })
+    @OneToMany(type => InventoryEntryDetail, inventoryEntryDetail => inventoryEntryDetail.sellReference)
+    sellReferenceInventoryEntryDetails: InventoryEntryDetail[];
 }

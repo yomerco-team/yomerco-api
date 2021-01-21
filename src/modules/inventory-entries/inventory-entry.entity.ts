@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { InventoryEntryDetail } from '../inventory-entry-details/inventory-entry-detail.entity';
 import { ProductProvider } from '../product-providers/product-provider.entity';
 import { Wharehouse } from '../wharehouses/wharehouse.entity';
 
@@ -33,4 +34,8 @@ export class InventoryEntry {
   @ManyToOne(type => Wharehouse, wharehouse => wharehouse.inventoryEntries)
   @JoinColumn({ name: 'wharehouse_id' })
   wharehouse: Wharehouse;
+
+  @ApiProperty({ type: () => [InventoryEntryDetail] })
+  @OneToMany(type => InventoryEntryDetail, inventoryEntryDetail => inventoryEntryDetail.inventoryEntry)
+  details: InventoryEntryDetail[];
 }
