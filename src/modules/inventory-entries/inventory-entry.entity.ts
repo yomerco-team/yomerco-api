@@ -10,9 +10,11 @@ export class InventoryEntry {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiPropertyOptional()
   @Column({ name: 'description', type: 'varchar', length: 200, nullable: true })
   description?: string;
 
+  @ApiPropertyOptional()
   @Column({ name: 'proof_url', type: 'varchar', length: 200, nullable: true })
   proofUrl?: string;
 

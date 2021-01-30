@@ -7,8 +7,8 @@ import { ProductProvidersService } from './product-providers.service';
 
 import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
-import { FindOneInput } from './dto/find-one-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
+import { DefaultFindOneInput } from 'src/common/dto/default-find-one-input.dto';
 @ApiTags('product-providers')
 @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
 @Controller('product-providers')
@@ -41,7 +41,7 @@ export class ProductProvidersController {
     type: ProductProvider
   })
   @Patch(':id')
-  public update(@Param() findOneInput: FindOneInput, @Body() updateBodyInput: UpdateInput): Promise<any> {
+  public update(@Param() findOneInput: DefaultFindOneInput, @Body() updateBodyInput: UpdateInput): Promise<any> {
     return this.service.update(findOneInput, updateBodyInput);
   }
 
@@ -51,7 +51,7 @@ export class ProductProvidersController {
     type: ProductProvider
   })
   @Delete(':id')
-  public delete(@Param() findOneInput: FindOneInput): Promise<any> {
+  public delete(@Param() findOneInput: DefaultFindOneInput): Promise<any> {
     return this.service.delete(findOneInput);
   }
 }

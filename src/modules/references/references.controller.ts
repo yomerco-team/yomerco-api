@@ -8,8 +8,8 @@ import { Reference } from './reference.entity';
 
 import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
-import { FindOneInput } from './dto/find-one-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
+import { DefaultFindOneInput } from '../../common/dto/default-find-one-input.dto';
 
 @ApiTags('references')
 @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
@@ -43,7 +43,7 @@ export class ReferencesController {
     type: Reference
   })
   @Patch(':uniqueCode')
-  update(@Param() findOneInput: FindOneInput, @Body() updateInput: UpdateInput): Promise<Reference> {
+  update(@Param() findOneInput: DefaultFindOneInput, @Body() updateInput: UpdateInput): Promise<Reference> {
     return this.update(findOneInput, updateInput);
   }
 

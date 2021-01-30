@@ -8,6 +8,7 @@ import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
 import { FindOneInput } from './dto/find-one-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
+import { DefaultFindOneInput } from '../../common/dto/default-find-one-input.dto';
 
 @Injectable()
 export class ProductProvidersService {
@@ -62,7 +63,7 @@ export class ProductProvidersService {
    * @return {*}  {(Promise<ProductProvider | null>)}
    * @memberof ProductProvidersService
    */
-  public async findOne(findOneInput: FindOneInput): Promise<ProductProvider | null> {
+  public async findOne(findOneInput: DefaultFindOneInput): Promise<ProductProvider | null> {
     const { id } = findOneInput;
 
     const item = await this.productProviderRepository.createQueryBuilder('pp')
@@ -80,7 +81,7 @@ export class ProductProvidersService {
    * @return {*}  {Promise<ProductProvider>}
    * @memberof ProductProvidersService
    */
-  public async update(findOneInput: FindOneInput, updateBodyInput: UpdateInput): Promise<ProductProvider> {
+  public async update(findOneInput: DefaultFindOneInput, updateBodyInput: UpdateInput): Promise<ProductProvider> {
     const existing = await this.findOne(findOneInput);
 
     if (!existing) {
@@ -97,7 +98,7 @@ export class ProductProvidersService {
     return saved;
   }
 
-  public async delete(findOneInput: FindOneInput): Promise<ProductProvider> {
+  public async delete(findOneInput: DefaultFindOneInput): Promise<ProductProvider> {
     const item = await this.findOne(findOneInput);
 
     if (!item) {

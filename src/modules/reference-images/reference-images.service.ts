@@ -45,6 +45,10 @@ export class ReferenceImagesService {
   public async create(file: any, createInput: CreateInput): Promise<ReferenceImage[]> {
     let filePath = '';
     try {
+      if (!file) {
+        throw new BadRequestException('file is required.');
+      }
+
       if (!file.mimetype.startsWith('image')) {
         throw new BadRequestException('mimetype not allowed.');
       }

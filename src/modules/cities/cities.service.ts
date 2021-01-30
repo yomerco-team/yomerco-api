@@ -4,8 +4,8 @@ import { Repository } from 'typeorm';
 
 import { City } from './city.entity';
 
-import { FindOneInput } from './dto/find-one-input.dto';
 import { GetOneByNameInput } from './dto/get-one-by-name-input.dto';
+import { DefaultFindOneInput } from 'src/common/dto/default-find-one-input.dto';
 
 @Injectable()
 export class CitiesService {
@@ -14,7 +14,7 @@ export class CitiesService {
     private readonly cityRepository: Repository<City>
   ) {}
 
-  public async findOne(findOneInput: FindOneInput): Promise<City | null> {
+  public async findOne(findOneInput: DefaultFindOneInput): Promise<City | null> {
     const { id } = findOneInput;
 
     const city = await this.cityRepository.findOne(id);

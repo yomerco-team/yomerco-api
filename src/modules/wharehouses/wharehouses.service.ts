@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 
 import { Wharehouse } from './wharehouse.entity';
 
-import { FindOneInput } from './dto/find-one-input.dto';
+import { DefaultFindOneInput } from '../../common/dto/default-find-one-input.dto';
 
 @Injectable()
 export class WharehousesService {
@@ -21,7 +21,7 @@ export class WharehousesService {
    * @return {*}  {(Promise<Wharehouse | null>)}
    * @memberof WharehousesService
    */
-  public async findOne(findOneInput: FindOneInput): Promise<Wharehouse | null> {
+  public async findOne(findOneInput: DefaultFindOneInput): Promise<Wharehouse | null> {
     const { id } = findOneInput;
 
     const item = await this.wharehouseRepository.createQueryBuilder('w')

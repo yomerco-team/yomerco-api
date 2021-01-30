@@ -22,6 +22,7 @@ import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
 import { FindOneInput } from './dto/find-one-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
+import { DefaultFindOneInput } from '../../common/dto/default-find-one-input.dto';
 
 @Injectable()
 export class ReferencesService {
@@ -59,7 +60,7 @@ export class ReferencesService {
     // check the city
     const { cityId } = createInput;
 
-    const city = await this.citiesService.findOne({ id: cityId });
+    const city = await this.citiesService.findOne({ id: '' + cityId });
 
     if (!city) {
       throw new NotFoundException(`can't get the city with id ${cityId}.`);
