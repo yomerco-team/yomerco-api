@@ -25,8 +25,8 @@
     "seed:local:pro": "npx cross-env NODE_ENV=production.local ts-node ./src/seeds"
   },
   "dependencies": {
-    "@google-cloud/storage": "5.7.3",
-    "@nestjs/common": "7.6.9",
+    "@google-cloud/storage": "5.7.4",
+    "@nestjs/common": "7.6.7",
     "@nestjs/config": "0.6.2",
     "@nestjs/core": "7.6.9",
     "@nestjs/platform-express": "7.6.9",
