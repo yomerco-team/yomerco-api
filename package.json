@@ -33,7 +33,7 @@
     "@nestjs/platform-express": "7.6.12",
     "@nestjs/swagger": "4.7.13",
     "@nestjs/typeorm": "7.1.5",
-    "class-transformer": "0.3.2",
+    "class-transformer": "0.4.0",
     "class-validator": "0.13.1",
     "cloudinary": "1.24.0",
     "cross-env": "7.0.3",
