@@ -18,11 +18,12 @@ import { SubCategoriesService } from '../sub-categories/sub-categories.service';
 import { CitiesService } from '../cities/cities.service';
 import { ParametersService } from '../parameters/parameters.service';
 
+import { UploadFile } from '../../common/interfaces/upload-file.int';
+
 import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
 import { FindOneInput } from './dto/find-one-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
-import { DefaultFindOneInput } from '../../common/dto/default-find-one-input.dto';
 
 @Injectable()
 export class ReferencesService {
@@ -205,7 +206,7 @@ export class ReferencesService {
     return saved;
   }
 
-  public async uploadReferences(file: any): Promise<any> {
+  public async uploadReferences(file: UploadFile): Promise<any> {
     (async () => {
       const fileContent: string = file.buffer.toString('utf-8');
 

@@ -31,8 +31,8 @@ export const ParameterFactory = {
 
       if (found) {
         itemToHandle = await connection.getRepository(Parameter).preload({
-          ...found,
-          value: item.value
+          id: found.id,
+          ...item
         });
       } else itemToHandle = item;
 

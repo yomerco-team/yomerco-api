@@ -6,11 +6,12 @@ import { ReferencesService } from './references.service';
 
 import { Reference } from './reference.entity';
 
+import { UploadFile } from '../../common/interfaces/upload-file.int';
+
 import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
 import { DefaultFindOneInput } from '../../common/dto/default-find-one-input.dto';
-
 @ApiTags('references')
 @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
 @Controller('references')
@@ -49,7 +50,7 @@ export class ReferencesController {
 
   @Post('upload-references')
   @UseInterceptors(FileInterceptor('file'))
-  uploadReferences(@UploadedFile() file): any {
+  uploadReferences(@UploadedFile() file: UploadFile): any {
     return this.service.uploadReferences(file);
   }
 }

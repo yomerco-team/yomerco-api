@@ -6,7 +6,6 @@ import { ProductProvider } from './product-provider.entity';
 
 import { CreateInput } from './dto/create-input.dto';
 import { FindAllInput } from './dto/find-all-input.dto';
-import { FindOneInput } from './dto/find-one-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
 import { DefaultFindOneInput } from '../../common/dto/default-find-one-input.dto';
 

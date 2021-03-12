@@ -8,7 +8,7 @@ export class InventoryEntryDetail {
   @PrimaryGeneratedColumn()
   id: number;
   
-  @ManyToOne(type => Reference, reference => reference.buyReferenceInventoryEntryDetails)
+  @ManyToOne(() => Reference, reference => reference.buyReferenceInventoryEntryDetails)
   @JoinColumn({ name: 'buy_reference_id' })
   buyReference: Reference;
 
@@ -34,7 +34,7 @@ export class InventoryEntryDetail {
   buyTotal: number;
 
   
-  @ManyToOne(type => Reference, reference => reference.sellReferenceInventoryEntryDetails)
+  @ManyToOne(() => Reference, reference => reference.sellReferenceInventoryEntryDetails)
   @JoinColumn({ name: 'sell_reference_id' })
   sellReference: number;
 
@@ -59,7 +59,7 @@ export class InventoryEntryDetail {
   @Column({ name: 'sell_total', type: 'decimal', precision: 12, scale: 2, nullable: true })
   sellTotal: number;
 
-  @ManyToOne(type => InventoryEntry, inventoryEntry => inventoryEntry.details)
+  @ManyToOne(() => InventoryEntry, inventoryEntry => inventoryEntry.details)
   @JoinColumn({ name: 'inventory_entry_id' })
   inventoryEntry: InventoryEntry;
 }

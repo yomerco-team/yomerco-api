@@ -31,7 +31,7 @@ export class ReferenceImage {
   // relations
 
   @ApiProperty({ type: () => Reference })
-  @ManyToOne(type => Reference, reference => reference.referenceImages)
+  @ManyToOne(() => Reference, reference => reference.referenceImages)
   @JoinColumn({ name: 'reference_id' })
   reference: Reference;
 }

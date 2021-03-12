@@ -36,27 +36,27 @@ export class Reference {
 
     // relations
     @ApiProperty({ type: () => [ReferenceImage] })
-    @OneToMany(type => ReferenceImage, referenceImage => referenceImage.reference)
+    @OneToMany(() => ReferenceImage, referenceImage => referenceImage.reference)
     referenceImages: ReferenceImage;
 
     @ApiProperty({ type: () => [ReferencePrice] })
-    @OneToMany(type => ReferencePrice, referencePrice => referencePrice.reference)
+    @OneToMany(() => ReferencePrice, referencePrice => referencePrice.reference)
     referencePrices: ReferencePrice;
 
     @ApiProperty({ type: () => SubCategory })
-    @ManyToOne(type => SubCategory, subCategory => subCategory.references, { nullable: true })
+    @ManyToOne(() => SubCategory, subCategory => subCategory.references, { nullable: true })
     @JoinColumn({ name: 'sub_category_id' })
     subCategory: SubCategory;
 
     @ApiProperty({ type: () => [ReferenceInWharehouse] })
-    @OneToMany(type => ReferenceInWharehouse, referenceInWharehouse => referenceInWharehouse.wharehouse)
+    @OneToMany(() => ReferenceInWharehouse, referenceInWharehouse => referenceInWharehouse.wharehouse)
     referencesInWharehouse: ReferenceInWharehouse[];
 
     @ApiProperty({ type: () => [InventoryEntryDetail] })
-    @OneToMany(type => InventoryEntryDetail, inventoryEntryDetail => inventoryEntryDetail.buyReference)
+    @OneToMany(() => InventoryEntryDetail, inventoryEntryDetail => inventoryEntryDetail.buyReference)
     buyReferenceInventoryEntryDetails: InventoryEntryDetail[];
     
     @ApiProperty({ type: () => [InventoryEntryDetail] })
-    @OneToMany(type => InventoryEntryDetail, inventoryEntryDetail => inventoryEntryDetail.sellReference)
+    @OneToMany(() => InventoryEntryDetail, inventoryEntryDetail => inventoryEntryDetail.sellReference)
     sellReferenceInventoryEntryDetails: InventoryEntryDetail[];
 }

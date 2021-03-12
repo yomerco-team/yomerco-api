@@ -28,16 +28,16 @@ export class InventoryEntry {
 
   // relations
   @ApiProperty({ type: () => ProductProvider })
-  @ManyToOne(type => ProductProvider, productProvider => productProvider.inventoryEntries)
+  @ManyToOne(() => ProductProvider, productProvider => productProvider.inventoryEntries)
   @JoinColumn({ name: 'product_provider_id' })
   productProvider: ProductProvider;
 
   @ApiProperty({ type: () => Wharehouse })
-  @ManyToOne(type => Wharehouse, wharehouse => wharehouse.inventoryEntries)
+  @ManyToOne(() => Wharehouse, wharehouse => wharehouse.inventoryEntries)
   @JoinColumn({ name: 'wharehouse_id' })
   wharehouse: Wharehouse;
 
   @ApiProperty({ type: () => [InventoryEntryDetail] })
-  @OneToMany(type => InventoryEntryDetail, inventoryEntryDetail => inventoryEntryDetail.inventoryEntry)
+  @OneToMany(() => InventoryEntryDetail, inventoryEntryDetail => inventoryEntryDetail.inventoryEntry)
   details: InventoryEntryDetail[];
 }

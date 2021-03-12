@@ -5,9 +5,10 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ReferenceImage } from './reference-image.entity';
 import { ReferenceImagesService } from './reference-images.service';
 
+import { UploadFile } from '../../common/interfaces/upload-file.int';
+
 import { CreateInput } from './dto/create-input';
 import { RemoveInput } from './dto/remove-input.dto';
-
 @ApiTags('reference-images')
 @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
 @Controller('reference-images')
@@ -21,7 +22,7 @@ export class ReferenceImagesController {
   })
   @Post(':referenceUniqueCode')
   @UseInterceptors(FileInterceptor('file'))
-  create(@UploadedFile() file, @Param() createInput: CreateInput): Promise<ReferenceImage[]> {
+  create(@UploadedFile() file: UploadFile, @Param() createInput: CreateInput): Promise<ReferenceImage[]> {
     return this.service.create(file, createInput);
   }
 

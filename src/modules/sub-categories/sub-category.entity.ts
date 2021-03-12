@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { Category } from '../categories/category.entity';
 import { Reference } from '../references/reference.entity';
@@ -27,17 +27,17 @@ export class SubCategory {
   createdAt: Date;
 
   @ApiProperty()
-  @CreateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
   // relations
 
   @ApiProperty({ type: () => Category })
-  @ManyToOne(type => Category, category => category.subCategories)
+  @ManyToOne(() => Category, category => category.subCategories)
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
   @ApiProperty({ type: () => [Reference] })
-  @OneToMany(type => Reference, reference => reference.subCategory)
+  @OneToMany(() => Reference, reference => reference.subCategory)
   references: Reference[]
 }

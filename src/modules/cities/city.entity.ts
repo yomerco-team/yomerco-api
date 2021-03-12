@@ -26,13 +26,13 @@ export class City {
   // relations
   
   @ApiProperty({ type: () => State })
-  @ManyToOne(type => State, state => state.cities)
+  @ManyToOne(() => State, state => state.cities)
   @JoinColumn({ name: 'state_id' })
   state: State;
 
-  @OneToMany(type => Location, location => location.city)
+  @OneToMany(() => Location, location => location.city)
   locations: Location[];
 
-  @OneToMany(type => ReferencePrice, referencePrice => referencePrice.city)
+  @OneToMany(() => ReferencePrice, referencePrice => referencePrice.city)
   referencePrices: ReferencePrice[];
 }

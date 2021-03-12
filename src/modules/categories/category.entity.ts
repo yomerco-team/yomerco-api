@@ -32,6 +32,6 @@ export class Category {
   // relations
   
   @ApiProperty({ type: () => [SubCategory] })
-  @OneToMany(type => SubCategory, subCategory => subCategory.category)
+  @OneToMany(() => SubCategory, subCategory => subCategory.category)
   subCategories: SubCategory[];
 }

@@ -12,6 +12,8 @@ import { StorageService } from 'src/common/storage/storage.service';
 import { ReferenceImage } from './reference-image.entity';
 import { ReferencesService } from '../references/references.service';
 
+import { UploadFile } from '../../common/interfaces/upload-file.int';
+
 import { CreateInput } from './dto/create-input';
 import { RemoveInput } from './dto/remove-input.dto';
 import { CreateFromUrlInput } from '../references/dto/create-from-url-input.dto';
@@ -42,7 +44,7 @@ export class ReferenceImagesService {
    * @return {*}  {Promise<ReferenceImage>}
    * @memberof ReferenceImagesService
    */
-  public async create(file: any, createInput: CreateInput): Promise<ReferenceImage[]> {
+  public async create(file: UploadFile, createInput: CreateInput): Promise<ReferenceImage[]> {
     let filePath = '';
     try {
       if (!file) {
