@@ -5,6 +5,8 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { InventoryEntry } from './inventory-entry.entity';
 import { InventoryEntriesService } from './inventory-entries.service';
 
+import { UploadFile } from '../../common/interfaces/upload-file.int';
+
 import { CreateInput } from './dto/create-input.dto';
 import { DefaultFindOneInput } from '../../common/dto/default-find-one-input.dto';
 import { ListInput } from './dto/list-input.dto';
@@ -32,7 +34,7 @@ export class InventoryEntriesController {
   })
   @Post('upload-proof/:id')
   @UseInterceptors(FileInterceptor('file'))
-  public uploadProof(@UploadedFile() file, @Param() uploadProofInput: DefaultFindOneInput): Promise<any> {
+  public uploadProof(@UploadedFile() file: UploadFile, @Param() uploadProofInput: DefaultFindOneInput): Promise<any> {
     return this.service.uploadProof(file, uploadProofInput);
   }
 

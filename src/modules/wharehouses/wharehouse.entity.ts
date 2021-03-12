@@ -26,15 +26,15 @@ export class Wharehouse {
 
   // relations
   @ApiProperty({ type: () => Location })
-  @ManyToOne(type => Location, location => location.wharehouses)
+  @ManyToOne(() => Location, location => location.wharehouses)
   @JoinColumn({ name: 'location_id' })
   location: Location;
 
   @ApiProperty({ type: () => [ReferenceInWharehouse] })
-  @OneToMany(type => ReferenceInWharehouse, referenceInWharehouse => referenceInWharehouse.wharehouse)
+  @OneToMany(() => ReferenceInWharehouse, referenceInWharehouse => referenceInWharehouse.wharehouse)
   referencesInWharehouse: ReferenceInWharehouse;
 
   @ApiProperty({ type: () => [InventoryEntry] })
-  @OneToMany(type => InventoryEntry, inventoryEntry => inventoryEntry.wharehouse)
+  @OneToMany(() => InventoryEntry, inventoryEntry => inventoryEntry.wharehouse)
   inventoryEntries: InventoryEntry[];
 }

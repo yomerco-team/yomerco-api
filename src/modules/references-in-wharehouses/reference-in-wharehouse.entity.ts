@@ -15,11 +15,11 @@ export class ReferenceInWharehouse {
 
   // relations
 
-  @ManyToOne(type => Wharehouse, wharehouse => wharehouse.referencesInWharehouse, { nullable: true })
+  @ManyToOne(() => Wharehouse, wharehouse => wharehouse.referencesInWharehouse, { nullable: true })
   @JoinColumn({ name: 'wharehouse_id' })
   wharehouse: Wharehouse;
 
-  @ManyToOne(type => Reference, reference => reference.referencesInWharehouse, { nullable: true })
+  @ManyToOne(() => Reference, reference => reference.referencesInWharehouse, { nullable: true })
   @JoinColumn({ name: 'reference_id' })
   reference: Reference;
 }

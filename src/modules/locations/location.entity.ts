@@ -30,11 +30,11 @@ export class Location {
   // relations  
 
   @ApiProperty({ type: () => City })
-  @ManyToOne(type => City, city => city.locations)
+  @ManyToOne(() => City, city => city.locations)
   @JoinColumn({ name: 'city_id' })
   city: City;
 
   @ApiProperty({ type: () => [Wharehouse] })
-  @OneToMany(type => Wharehouse, wharehouse => wharehouse.location)
+  @OneToMany(() => Wharehouse, wharehouse => wharehouse.location)
   wharehouses: Wharehouse[];
 }

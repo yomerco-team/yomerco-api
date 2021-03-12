@@ -56,11 +56,11 @@ export class ReferencePrice {
 
   // relations
 
-  @ManyToOne(type => City, city => city.referencePrices)
+  @ManyToOne(() => City, city => city.referencePrices)
   @JoinColumn({ name: 'city_id' })
   city: City;
 
-  @ManyToOne(type => Reference, reference => reference.referencePrices)
+  @ManyToOne(() => Reference, reference => reference.referencePrices)
   @JoinColumn({ name: 'reference_id' })
   reference: Reference;
 }

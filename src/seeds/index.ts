@@ -5,6 +5,7 @@ import { Logger } from '@nestjs/common';
 import { createConnection, ConnectionOptions } from 'typeorm';
 
 import { ParameterFactory } from './parameters.seed';
+import { UserTypeFactory } from './user-types.seed';
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../../.env.${NODE_ENV}`);
@@ -21,8 +22,8 @@ const opt = {
   autoLoadEntities: true,
   synchronize: false,
   entities: [
-    ParameterFactory.entity
-    
+    ParameterFactory.entity,
+    UserTypeFactory.entity    
   ]
 };
 
@@ -34,6 +35,12 @@ const opt = {
   await ParameterFactory.handle(connection);
 
   Logger.debug('--- PARAMETERS END ---');
+
+  Logger.debug('--- USER TYPES START ---');
+
+  await UserTypeFactory.handle(connection);
+
+  Logger.debug('--- USER TYPES END ---');
 
   connection.close();
 })()

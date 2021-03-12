@@ -11,6 +11,8 @@ import { InventoryEntry } from './inventory-entry.entity';
 import { ProductProvidersService } from '../product-providers/product-providers.service';
 import { WharehousesService } from '../wharehouses/wharehouses.service';
 
+import { UploadFile } from '../../common/interfaces/upload-file.int';
+
 import { CreateInput } from './dto/create-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
 import { DefaultFindOneInput } from 'src/common/dto/default-find-one-input.dto';
@@ -163,7 +165,7 @@ export class InventoryEntriesService {
    * @return {*} 
    * @memberof InventoryEntriesService
    */
-  public async uploadProof(file: any, uploadProofInput: DefaultFindOneInput) {
+  public async uploadProof(file: UploadFile, uploadProofInput: DefaultFindOneInput): Promise<InventoryEntry> {
     let filePath = '';
 
     try {

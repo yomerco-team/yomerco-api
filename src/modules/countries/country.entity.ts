@@ -26,7 +26,7 @@ export class Country {
   updatedAt: Date;
 
   // relations
-  @OneToMany(type => State, state => state.country)
+  @OneToMany(() => State, state => state.country)
   states: State[];
 
 }

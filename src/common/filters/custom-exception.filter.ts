@@ -1,6 +1,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 
 @Catch()
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export class CustomExceptionFilter<T> implements ExceptionFilter {
   catch(exception: Error, host: ArgumentsHost): void {
     console.error(exception);

@@ -38,6 +38,6 @@ export class ProductProvider {
 
   // relations
   @ApiProperty({ type: () => [InventoryEntry]})
-  @OneToMany(type => InventoryEntry, inventoryEntry => inventoryEntry.productProvider)
+  @OneToMany(() => InventoryEntry, inventoryEntry => inventoryEntry.productProvider)
   inventoryEntries: InventoryEntry[];
 }

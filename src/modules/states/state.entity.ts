@@ -24,10 +24,10 @@ export class State {
   // relations
 
   @ApiProperty({ type: () => Country })
-  @ManyToOne(type => Country, country => country.states)
+  @ManyToOne(() => Country, country => country.states)
   @JoinColumn({ name: 'country_id' })
   country: Country;
 
-  @OneToMany(type => City, city => city.state)
+  @OneToMany(() => City, city => city.state)
   cities: City[];
 }

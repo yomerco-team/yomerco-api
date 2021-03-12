@@ -26,6 +26,7 @@ import { ProductProvidersModule } from './modules/product-providers/product-prov
 import { ReferencesInWharehousesModule } from './modules/references-in-wharehouses/references-in-wharehouses.module';
 import { InventoryEntriesModule } from './modules/inventory-entries/inventory-entries.module';
 import { InventoryEntryDetailsModule } from './modules/inventory-entry-details/inventory-entry-details.module';
+import { UserTypesModule } from './modules/user-types/user-types.module';
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
@@ -66,7 +67,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
     ProductProvidersModule,
     ReferencesInWharehousesModule,
     InventoryEntriesModule,
-    InventoryEntryDetailsModule
+    InventoryEntryDetailsModule,
+    UserTypesModule
   ],
   controllers: [AppController],
   providers: [AppService]
