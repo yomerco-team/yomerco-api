@@ -7,7 +7,7 @@ import { Reference } from '../references/reference.entity';
 export class InventoryEntryDetail {
   @PrimaryGeneratedColumn()
   id: number;
-  
+
   @ManyToOne(() => Reference, reference => reference.buyReferenceInventoryEntryDetails)
   @JoinColumn({ name: 'buy_reference_id' })
   buyReference: Reference;
@@ -33,7 +33,6 @@ export class InventoryEntryDetail {
   @Column({ name: 'buy_total', type: 'decimal', precision: 12, scale: 2, nullable: true })
   buyTotal: number;
 
-  
   @ManyToOne(() => Reference, reference => reference.sellReferenceInventoryEntryDetails)
   @JoinColumn({ name: 'sell_reference_id' })
   sellReference: number;

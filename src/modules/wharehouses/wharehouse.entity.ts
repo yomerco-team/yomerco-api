@@ -23,7 +23,6 @@ export class Wharehouse {
   @Column({ type: 'varchar', length: 200 })
   address: string;
 
-
   // relations
   @ApiProperty({ type: () => Location })
   @ManyToOne(() => Location, location => location.wharehouses)

@@ -30,7 +30,7 @@ export class Category {
   updatedAt: Date;
 
   // relations
-  
+
   @ApiProperty({ type: () => [SubCategory] })
   @OneToMany(() => SubCategory, subCategory => subCategory.category)
   subCategories: SubCategory[];

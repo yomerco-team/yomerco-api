@@ -15,7 +15,7 @@ import { UpdateInput } from './dto/update-input.dto';
 @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
 @Controller('inventory-entries')
 export class InventoryEntriesController {
-  constructor(private readonly service: InventoryEntriesService) {}
+  constructor (private readonly service: InventoryEntriesService) {}
 
   @ApiResponse({
     status: 201,
@@ -23,7 +23,7 @@ export class InventoryEntriesController {
     type: InventoryEntry
   })
   @Post()
-  public create(@Body() createInput: CreateInput): Promise<any> {
+  public create (@Body() createInput: CreateInput): Promise<any> {
     return this.service.create(createInput);
   }
 
@@ -34,7 +34,7 @@ export class InventoryEntriesController {
   })
   @Post('upload-proof/:id')
   @UseInterceptors(FileInterceptor('file'))
-  public uploadProof(@UploadedFile() file: UploadFile, @Param() uploadProofInput: DefaultFindOneInput): Promise<any> {
+  public uploadProof (@UploadedFile() file: UploadFile, @Param() uploadProofInput: DefaultFindOneInput): Promise<any> {
     return this.service.uploadProof(file, uploadProofInput);
   }
 
@@ -44,7 +44,7 @@ export class InventoryEntriesController {
     type: [InventoryEntry]
   })
   @Get()
-  public list(@Query() listInput: ListInput): Promise<any> {
+  public list (@Query() listInput: ListInput): Promise<any> {
     return this.service.list(listInput);
   }
 
@@ -54,7 +54,7 @@ export class InventoryEntriesController {
     type: InventoryEntry
   })
   @Patch(':id')
-  public update(@Param() findOneInput: DefaultFindOneInput, @Body() updateInput: UpdateInput): Promise<any> {
+  public update (@Param() findOneInput: DefaultFindOneInput, @Body() updateInput: UpdateInput): Promise<any> {
     return this.service.update(findOneInput, updateInput);
   }
 
@@ -64,7 +64,7 @@ export class InventoryEntriesController {
     type: InventoryEntry
   })
   @Delete(':id')
-  public delete(@Param() findOneInput: DefaultFindOneInput): Promise<any> {
+  public delete (@Param() findOneInput: DefaultFindOneInput): Promise<any> {
     return this.service.delete(findOneInput);
   }
 }

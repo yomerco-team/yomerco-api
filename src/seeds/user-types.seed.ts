@@ -21,14 +21,13 @@ export const UserTypeFactory = {
   },
 
   handle: async (connection: Connection): Promise<void> => {
-    const items = UserTypeFactory.build(connection);    
+    const items = UserTypeFactory.build(connection);
 
     for (const item of items) {
       const found = await connection.getRepository(UserType).createQueryBuilder('t')
         .where('t.code = :code', { code: item.code })
         .getOne();
 
-      
       let itemToHandle;
 
       if (found) {

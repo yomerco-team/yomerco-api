@@ -9,7 +9,7 @@ import { AppModule } from './app.module';
 
 import { CustomExceptionFilter } from './common/filters/custom-exception.filter';
 
-async function bootstrap() {
+async function bootstrap () {
   const app = await NestFactory.create(AppModule);
 
   // getting the config service

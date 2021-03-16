@@ -1,8 +1,7 @@
-import {MigrationInterface, QueryRunner} from 'typeorm';
+import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class CreateReferencesInWhareHousesTable1610679676314 implements MigrationInterface {
-
-  public async up(queryRunner: QueryRunner): Promise<void> {
+  public async up (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
       create table references_in_wharehouses
       (
@@ -21,8 +20,7 @@ export class CreateReferencesInWhareHousesTable1610679676314 implements Migratio
       `);
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {
+  public async down (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('drop table "references_in_wharehouses"');
   }
-
 }

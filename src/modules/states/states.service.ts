@@ -5,7 +5,7 @@ import { State } from './state.entity';
 
 @Injectable()
 export class StatesService {
-  constructor(
+  constructor (
     @InjectRepository(State)
     private readonly stateRepository: Repository<State>
   ) {}

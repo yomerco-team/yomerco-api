@@ -55,7 +55,7 @@ export class Reference {
     @ApiProperty({ type: () => [InventoryEntryDetail] })
     @OneToMany(() => InventoryEntryDetail, inventoryEntryDetail => inventoryEntryDetail.buyReference)
     buyReferenceInventoryEntryDetails: InventoryEntryDetail[];
-    
+
     @ApiProperty({ type: () => [InventoryEntryDetail] })
     @OneToMany(() => InventoryEntryDetail, inventoryEntryDetail => inventoryEntryDetail.sellReference)
     sellReferenceInventoryEntryDetails: InventoryEntryDetail[];

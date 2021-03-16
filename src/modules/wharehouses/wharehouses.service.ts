@@ -8,12 +8,11 @@ import { DefaultFindOneInput } from '../../common/dto/default-find-one-input.dto
 
 @Injectable()
 export class WharehousesService {
-  constructor(
+  constructor (
     @InjectRepository(Wharehouse)
     private readonly wharehouseRepository: Repository<Wharehouse>
   ) {}
 
-  
   /**
    *
    *
@@ -21,7 +20,7 @@ export class WharehousesService {
    * @return {*}  {(Promise<Wharehouse | null>)}
    * @memberof WharehousesService
    */
-  public async findOne(findOneInput: DefaultFindOneInput): Promise<Wharehouse | null> {
+  public async findOne (findOneInput: DefaultFindOneInput): Promise<Wharehouse | null> {
     const { id } = findOneInput;
 
     const item = await this.wharehouseRepository.createQueryBuilder('w')

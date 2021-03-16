@@ -27,7 +27,7 @@ export class Location {
   @CreateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  // relations  
+  // relations
 
   @ApiProperty({ type: () => City })
   @ManyToOne(() => City, city => city.locations)

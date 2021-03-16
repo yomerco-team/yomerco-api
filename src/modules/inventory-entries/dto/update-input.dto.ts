@@ -11,12 +11,12 @@ export class UpdateInput {
   @IsOptional()
   @IsString()
   readonly proofUrl?: string;
-  
+
   @ApiPropertyOptional()
   @IsOptional()
   @IsNumber()
   readonly productProviderId?: number;
-  
+
   @ApiPropertyOptional()
   @IsOptional()
   @IsNumber()

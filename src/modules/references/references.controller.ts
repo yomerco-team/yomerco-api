@@ -16,7 +16,7 @@ import { DefaultFindOneInput } from '../../common/dto/default-find-one-input.dto
 @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
 @Controller('references')
 export class ReferencesController {
-  constructor(private readonly service: ReferencesService) {}
+  constructor (private readonly service: ReferencesService) {}
 
   @ApiResponse({
     status: 201,
@@ -24,7 +24,7 @@ export class ReferencesController {
     type: Reference
   })
   @Post()
-  create(@Body() createInput: CreateInput): Promise<Reference> {
+  create (@Body() createInput: CreateInput): Promise<Reference> {
     return this.service.create(createInput);
   }
 
@@ -34,7 +34,7 @@ export class ReferencesController {
     type: [Reference]
   })
   @Get()
-  findAll(@Query() findAllInput: FindAllInput): Promise<Reference[]> {
+  findAll (@Query() findAllInput: FindAllInput): Promise<Reference[]> {
     return this.service.findAll(findAllInput);
   }
 
@@ -44,13 +44,13 @@ export class ReferencesController {
     type: Reference
   })
   @Patch(':uniqueCode')
-  update(@Param() findOneInput: DefaultFindOneInput, @Body() updateInput: UpdateInput): Promise<Reference> {
+  update (@Param() findOneInput: DefaultFindOneInput, @Body() updateInput: UpdateInput): Promise<Reference> {
     return this.update(findOneInput, updateInput);
   }
 
   @Post('upload-references')
   @UseInterceptors(FileInterceptor('file'))
-  uploadReferences(@UploadedFile() file: UploadFile): any {
+  uploadReferences (@UploadedFile() file: UploadFile): any {
     return this.service.uploadReferences(file);
   }
 }

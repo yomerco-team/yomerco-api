@@ -21,7 +21,7 @@ export class InventoryEntry {
   @ApiPropertyOptional()
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
-  
+
   @ApiPropertyOptional()
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;

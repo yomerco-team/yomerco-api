@@ -24,7 +24,7 @@ export class City {
   updatedAt: Date;
 
   // relations
-  
+
   @ApiProperty({ type: () => State })
   @ManyToOne(() => State, state => state.cities)
   @JoinColumn({ name: 'state_id' })

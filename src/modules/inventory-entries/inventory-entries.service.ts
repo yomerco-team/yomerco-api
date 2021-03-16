@@ -1,11 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { v2 as cloudinary }  from 'cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
 
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+import { DefaultFindOneInput } from 'src/common/dto/default-find-one-input.dto';
 import { InventoryEntry } from './inventory-entry.entity';
 
 import { ProductProvidersService } from '../product-providers/product-providers.service';
@@ -15,16 +16,15 @@ import { UploadFile } from '../../common/interfaces/upload-file.int';
 
 import { CreateInput } from './dto/create-input.dto';
 import { UpdateInput } from './dto/update-input.dto';
-import { DefaultFindOneInput } from 'src/common/dto/default-find-one-input.dto';
 import { ListInput } from './dto/list-input.dto';
 @Injectable()
 export class InventoryEntriesService {
-  constructor(
+  constructor (
     @InjectRepository(InventoryEntry)
     private readonly inventoryEntryRepository: Repository<InventoryEntry>,
     private readonly productProvidersService: ProductProvidersService,
     private readonly wharehousesService: WharehousesService
-  ){}
+  ) {}
 
   /**
    *
@@ -33,7 +33,7 @@ export class InventoryEntriesService {
    * @return {*}  {Promise<InventoryEntry>}
    * @memberof InventoryEntriesService
    */
-  public async create(createInput: CreateInput): Promise<InventoryEntry> {
+  public async create (createInput: CreateInput): Promise<InventoryEntry> {
     const { productProviderId } = createInput;
 
     const existingProductProvider = await this.productProvidersService.findOne({ id: '' + productProviderId });
@@ -73,7 +73,7 @@ export class InventoryEntriesService {
    * @return {*}  {Promise<InventoryEntry>}
    * @memberof InventoryEntriesService
    */
-  public async findOne(findOneInput: DefaultFindOneInput): Promise<InventoryEntry> {
+  public async findOne (findOneInput: DefaultFindOneInput): Promise<InventoryEntry> {
     const { id } = findOneInput;
 
     const item = await this.inventoryEntryRepository.createQueryBuilder('ie')
@@ -83,7 +83,7 @@ export class InventoryEntriesService {
     return item || null;
   }
 
-  public async list(listInput: ListInput): Promise<InventoryEntry[]> {
+  public async list (listInput: ListInput): Promise<InventoryEntry[]> {
     const { limit = 10, offset = 0, search = '' } = listInput;
 
     const query = this.inventoryEntryRepository.createQueryBuilder('ie')
@@ -104,14 +104,14 @@ export class InventoryEntriesService {
     return items;
   }
 
-  public async update(findOneInput: DefaultFindOneInput, updateInput: UpdateInput): Promise<InventoryEntry> {
+  public async update (findOneInput: DefaultFindOneInput, updateInput: UpdateInput): Promise<InventoryEntry> {
     const existing = await this.findOne(findOneInput);
 
     if (!existing) {
       throw new NotFoundException(`can't get the inventory entry with id ${findOneInput.id}.`);
     }
 
-    let existingProductProvider;    
+    let existingProductProvider;
     if (updateInput.productProviderId) {
       const { productProviderId } = updateInput;
 
@@ -142,7 +142,7 @@ export class InventoryEntriesService {
     return saved;
   }
 
-  public async delete(findOneInput: DefaultFindOneInput): Promise<InventoryEntry> {
+  public async delete (findOneInput: DefaultFindOneInput): Promise<InventoryEntry> {
     const existing = await this.findOne(findOneInput);
 
     if (!existing) {
@@ -162,10 +162,10 @@ export class InventoryEntriesService {
    *
    * @param {*} file
    * @param {DefaultFindOneInput} uploadProofInput
-   * @return {*} 
+   * @return {*}
    * @memberof InventoryEntriesService
    */
-  public async uploadProof(file: UploadFile, uploadProofInput: DefaultFindOneInput): Promise<InventoryEntry> {
+  public async uploadProof (file: UploadFile, uploadProofInput: DefaultFindOneInput): Promise<InventoryEntry> {
     let filePath = '';
 
     try {
@@ -206,8 +206,6 @@ export class InventoryEntriesService {
       delete updated.wharehouse;
 
       return updated;
-    } catch (error) {
-      throw error;
     } finally {
       if (filePath) fs.unlinkSync(filePath);
     }

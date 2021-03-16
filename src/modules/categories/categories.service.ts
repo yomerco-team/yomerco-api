@@ -5,7 +5,7 @@ import { Category } from './category.entity';
 
 @Injectable()
 export class CategoriesService {
-  constructor(
+  constructor (
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>
   ) {}

@@ -1,27 +1,28 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 
 @Catch()
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line no-unused-vars
 export class CustomExceptionFilter<T> implements ExceptionFilter {
-  catch(exception: Error, host: ArgumentsHost): void {
+  catch (exception: Error, host: ArgumentsHost): void {
     console.error(exception);
 
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
     const status =
-      exception instanceof HttpException ?
-        exception.getStatus() :
-        HttpStatus.INTERNAL_SERVER_ERROR;
+      exception instanceof HttpException
+        ? exception.getStatus()
+        : HttpStatus.INTERNAL_SERVER_ERROR;
 
     const exceptionResponse = exception instanceof HttpException ? exception.getResponse() : null;
 
     let error;
     if (exceptionResponse) {
-      error = typeof exceptionResponse === 'string' ?
-        { message: exceptionResponse } :
+      error = typeof exceptionResponse === 'string'
+        ? { message: exceptionResponse }
         // eslint-disable-next-line @typescript-eslint/ban-types
-        (exceptionResponse as object);
+        : (exceptionResponse as object);
     } else {
       error = {
         message: exception.message
@@ -35,6 +36,5 @@ export class CustomExceptionFilter<T> implements ExceptionFilter {
       timestamp: new Date().toISOString(),
       path: request.url
     });
-
   }
 }

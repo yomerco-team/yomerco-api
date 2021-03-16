@@ -31,13 +31,13 @@ export class ProductProvider {
   @ApiPropertyOptional()
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
-  
+
   @ApiPropertyOptional()
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
   // relations
-  @ApiProperty({ type: () => [InventoryEntry]})
+  @ApiProperty({ type: () => [InventoryEntry] })
   @OneToMany(() => InventoryEntry, inventoryEntry => inventoryEntry.productProvider)
   inventoryEntries: InventoryEntry[];
 }

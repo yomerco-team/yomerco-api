@@ -8,12 +8,12 @@ import { CreateFromReferenceInput } from './dto/create-from-reference-input.dto'
 
 @Injectable()
 export class ReferencePricesService {
-  constructor(
+  constructor (
     @InjectRepository(ReferencePrice)
     private readonly referencePriceRepository: Repository<ReferencePrice>
   ) {}
 
-  public async createFromReference(createFromReferenceInput: CreateFromReferenceInput): Promise<ReferencePrice> {
+  public async createFromReference (createFromReferenceInput: CreateFromReferenceInput): Promise<ReferencePrice> {
     const created = this.referencePriceRepository.create({
       city: createFromReferenceInput.city,
       reference: createFromReferenceInput.reference,

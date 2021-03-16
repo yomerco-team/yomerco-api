@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 
 @Injectable()
 export class LoggingMiddleware implements NestMiddleware {
-  use(req: Request, res: Response, next: NextFunction): void {    
+  use (req: Request, res: Response, next: NextFunction): void {
     // eslint-disable-next-line no-console
     console.time('request-response time');
 

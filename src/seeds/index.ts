@@ -23,7 +23,7 @@ const opt = {
   synchronize: false,
   entities: [
     ParameterFactory.entity,
-    UserTypeFactory.entity    
+    UserTypeFactory.entity
   ]
 };
 

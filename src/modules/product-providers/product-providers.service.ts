@@ -11,10 +11,10 @@ import { DefaultFindOneInput } from '../../common/dto/default-find-one-input.dto
 
 @Injectable()
 export class ProductProvidersService {
-  constructor(
+  constructor (
     @InjectRepository(ProductProvider)
     private readonly productProviderRepository: Repository<ProductProvider>
-  ){}
+  ) {}
 
   /**
    *
@@ -23,7 +23,7 @@ export class ProductProvidersService {
    * @return {*}  {Promise<ProductProvider>}
    * @memberof ProductProvidersService
    */
-  public async create(createInput: CreateInput): Promise<ProductProvider> {
+  public async create (createInput: CreateInput): Promise<ProductProvider> {
     const created = this.productProviderRepository.create({
       address: createInput.address,
       document: createInput.document,
@@ -44,7 +44,7 @@ export class ProductProvidersService {
    * @return {*}  {Promise<ProductProvider[]>}
    * @memberof ProductProvidersService
    */
-  public async list(listInput: FindAllInput): Promise<ProductProvider[]> {
+  public async list (listInput: FindAllInput): Promise<ProductProvider[]> {
     const { limit = 0, offset = 0 } = listInput;
 
     const items = await this.productProviderRepository.createQueryBuilder('pp')
@@ -62,7 +62,7 @@ export class ProductProvidersService {
    * @return {*}  {(Promise<ProductProvider | null>)}
    * @memberof ProductProvidersService
    */
-  public async findOne(findOneInput: DefaultFindOneInput): Promise<ProductProvider | null> {
+  public async findOne (findOneInput: DefaultFindOneInput): Promise<ProductProvider | null> {
     const { id } = findOneInput;
 
     const item = await this.productProviderRepository.createQueryBuilder('pp')
@@ -80,7 +80,7 @@ export class ProductProvidersService {
    * @return {*}  {Promise<ProductProvider>}
    * @memberof ProductProvidersService
    */
-  public async update(findOneInput: DefaultFindOneInput, updateBodyInput: UpdateInput): Promise<ProductProvider> {
+  public async update (findOneInput: DefaultFindOneInput, updateBodyInput: UpdateInput): Promise<ProductProvider> {
     const existing = await this.findOne(findOneInput);
 
     if (!existing) {
@@ -97,7 +97,7 @@ export class ProductProvidersService {
     return saved;
   }
 
-  public async delete(findOneInput: DefaultFindOneInput): Promise<ProductProvider> {
+  public async delete (findOneInput: DefaultFindOneInput): Promise<ProductProvider> {
     const item = await this.findOne(findOneInput);
 
     if (!item) {

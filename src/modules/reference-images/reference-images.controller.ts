@@ -13,7 +13,7 @@ import { RemoveInput } from './dto/remove-input.dto';
 @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
 @Controller('reference-images')
 export class ReferenceImagesController {
-  constructor(private readonly service: ReferenceImagesService) {}
+  constructor (private readonly service: ReferenceImagesService) {}
 
   @ApiResponse({
     status: 201,
@@ -22,7 +22,7 @@ export class ReferenceImagesController {
   })
   @Post(':referenceUniqueCode')
   @UseInterceptors(FileInterceptor('file'))
-  create(@UploadedFile() file: UploadFile, @Param() createInput: CreateInput): Promise<ReferenceImage[]> {
+  create (@UploadedFile() file: UploadFile, @Param() createInput: CreateInput): Promise<ReferenceImage[]> {
     return this.service.create(file, createInput);
   }
 
@@ -31,7 +31,7 @@ export class ReferenceImagesController {
     description: 'response'
   })
   @Delete(':referenceUniqueCode/:id')
-  remove(@Param() removeInput: RemoveInput): Promise<any> {
+  remove (@Param() removeInput: RemoveInput): Promise<any> {
     return this.service.remove(removeInput);
   }
 }

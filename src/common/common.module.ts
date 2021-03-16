@@ -6,7 +6,7 @@ import { StorageModule } from './storage/storage.module';
   imports: [StorageModule]
 })
 export class CommonModule implements NestModule {
-  configure(consumer: MiddlewareConsumer): void {
+  configure (consumer: MiddlewareConsumer): void {
     consumer.apply(LoggingMiddleware).forRoutes('*');
-  }    
+  }
 }

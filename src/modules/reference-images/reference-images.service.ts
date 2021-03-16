@@ -1,14 +1,14 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { v2 as cloudinary }  from 'cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
 import { BadRequestException, forwardRef, HttpService, Inject, Injectable, NotFoundException, PreconditionFailedException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigType } from '@nestjs/config';
 
+import { StorageService } from 'src/common/storage/storage.service';
 import appConfig from '../../config/app.config';
 
-import { StorageService } from 'src/common/storage/storage.service';
 import { ReferenceImage } from './reference-image.entity';
 import { ReferencesService } from '../references/references.service';
 
@@ -19,7 +19,7 @@ import { RemoveInput } from './dto/remove-input.dto';
 import { CreateFromUrlInput } from '../references/dto/create-from-url-input.dto';
 @Injectable()
 export class ReferenceImagesService {
-  constructor(
+  constructor (
     @Inject(appConfig.KEY)
     private readonly appConfiguration: ConfigType<typeof appConfig>,
     private readonly storageService: StorageService,
@@ -44,7 +44,7 @@ export class ReferenceImagesService {
    * @return {*}  {Promise<ReferenceImage>}
    * @memberof ReferenceImagesService
    */
-  public async create(file: UploadFile, createInput: CreateInput): Promise<ReferenceImage[]> {
+  public async create (file: UploadFile, createInput: CreateInput): Promise<ReferenceImage[]> {
     let filePath = '';
     try {
       if (!file) {
@@ -63,26 +63,26 @@ export class ReferenceImagesService {
         throw new NotFoundException(`can't get the reference with unique code ${referenceUniqueCode}.`);
       }
 
-      const referenceImagesNumber = await this.referenceImageRepository.count({ where: { reference }});
+      const referenceImagesNumber = await this.referenceImageRepository.count({ where: { reference } });
 
       if (referenceImagesNumber >= 9) {
         throw new PreconditionFailedException(`the reference has ${referenceImagesNumber} images.`);
       }
-      
+
       // console.log('file', file);
 
       // console.log('createInput', createInput);
-  
+
       const basePath = path.resolve(__dirname);
       // const fileExt = file.originalname.split('.').pop();
-  
+
       // console.log('basePath', basePath);
       // console.log('fileExt', fileExt);
 
       filePath = `${basePath}/${file.originalname}`;
 
       // console.log('filePath', filePath);
-  
+
       fs.writeFileSync(filePath, file.buffer);
 
       const cloudinaryResponse = await cloudinary.uploader.upload(filePath, {
@@ -93,43 +93,41 @@ export class ReferenceImagesService {
         ]
       });
 
-      const { public_id, eager } = cloudinaryResponse;
-      
+      const { public_id: publicId, eager } = cloudinaryResponse;
+
       let createdReferenceImages: ReferenceImage[] = [];
 
       for (const item of eager) {
         let size: string;
 
         switch (item.width) {
-        case 150:
-          size = 'small';
-          break;
-        case 300:
-          size = 'medium';
-          break;
-        case 600:
-          size = 'large';
-          break;
-        default:
-          size = null;
-          break;
+          case 150:
+            size = 'small';
+            break;
+          case 300:
+            size = 'medium';
+            break;
+          case 600:
+            size = 'large';
+            break;
+          default:
+            size = null;
+            break;
         }
 
         const created = this.referenceImageRepository.create({
-          cloudId: public_id,
+          cloudId: publicId,
           url: item.secure_url,
           size,
           reference
         });
-  
+
         const saved = await this.referenceImageRepository.save(created);
 
         createdReferenceImages = [...createdReferenceImages, saved];
       }
-  
-      return createdReferenceImages;  
-    } catch (error) {
-      throw error;
+
+      return createdReferenceImages;
     } finally {
       if (filePath) fs.unlinkSync(filePath);
     }
@@ -142,7 +140,7 @@ export class ReferenceImagesService {
    * @return {*}  {Promise<ReferenceImage>}
    * @memberof ReferenceImagesService
    */
-  public async remove(removeInput: RemoveInput): Promise<any> {
+  public async remove (removeInput: RemoveInput): Promise<any> {
     const { id, referenceUniqueCode } = removeInput;
 
     const reference = await this.referencesService.findOne({ uniqueCode: referenceUniqueCode });
@@ -170,7 +168,7 @@ export class ReferenceImagesService {
     };
   }
 
-  public async createFromUrl(createFromUrlInput: CreateFromUrlInput): Promise<ReferenceImage[]> {
+  public async createFromUrl (createFromUrlInput: CreateFromUrlInput): Promise<ReferenceImage[]> {
     const { url, referenceUniqueCode } = createFromUrlInput;
 
     const result = await this.httpService.axiosRef({

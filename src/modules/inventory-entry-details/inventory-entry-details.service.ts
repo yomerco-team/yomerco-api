@@ -6,7 +6,7 @@ import { InventoryEntryDetail } from './inventory-entry-detail.entity';
 
 @Injectable()
 export class InventoryEntryDetailsService {
-  constructor(
+  constructor (
     @InjectRepository(InventoryEntryDetail)
     private readonly inventoryEntryDetailRepository: Repository<InventoryEntryDetail>
   ) {}

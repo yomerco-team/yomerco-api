@@ -10,9 +10,9 @@ import { DeleteFileInput } from './dto/delete-file-input.dto';
 export class StorageService {
   private readonly storage: Storage;
 
-  constructor(
+  constructor (
     @Inject(appConfig.KEY)
-    private readonly appConfiguration: ConfigType<typeof appConfig>,
+    private readonly appConfiguration: ConfigType<typeof appConfig>
   ) {
     this.storage = new Storage({
       projectId: this.appConfiguration.gcp.projectId,
@@ -23,7 +23,7 @@ export class StorageService {
     });
   }
 
-  public async uploadFile(uploadFileInput: UploadFileInput): Promise<File> {
+  public async uploadFile (uploadFileInput: UploadFileInput): Promise<File> {
     const { bucketName, destinationPath, sourcePath } = uploadFileInput;
 
     const options = {
@@ -58,8 +58,8 @@ export class StorageService {
         .bucket(bucketName)
         .file(object)
         .delete();
-      
-      Logger.debug(`file ${object} deleted!`);   
+
+      Logger.debug(`file ${object} deleted!`);
     } catch (error) {
       console.error(error);
       if (error.code !== HttpStatus.NOT_FOUND) {

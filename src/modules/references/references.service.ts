@@ -1,10 +1,10 @@
 import {
   BadRequestException,
   forwardRef,
-  Inject, 
-  Injectable, 
-  Logger, 
-  NotFoundException, 
+  Inject,
+  Injectable,
+  Logger,
+  NotFoundException,
   PreconditionFailedException
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -27,7 +27,7 @@ import { UpdateInput } from './dto/update-input.dto';
 
 @Injectable()
 export class ReferencesService {
-  constructor(
+  constructor (
         @InjectRepository(Reference)
         private readonly referenceRepository: Repository<Reference>,
         @Inject(forwardRef(() => ReferenceImagesService))
@@ -45,7 +45,7 @@ export class ReferencesService {
    * @return {*}  {Promise<Reference>}
    * @memberof ReferencesService
    */
-  public async create(createInput: CreateInput): Promise<Reference> {
+  public async create (createInput: CreateInput): Promise<Reference> {
     const { uniqueCode } = createInput;
 
     // check the existing reference
@@ -117,7 +117,6 @@ export class ReferencesService {
       }
     );
 
-
     return referenceForResult;
   }
 
@@ -128,7 +127,7 @@ export class ReferencesService {
    * @return {*}  {Promise<Reference[]>}
    * @memberof ReferencesService
    */
-  public async findAll(findAllInput: FindAllInput): Promise<Reference[]> {
+  public async findAll (findAllInput: FindAllInput): Promise<Reference[]> {
     const { limit = 10, offset = 0, cityId } = findAllInput;
 
     let query = this.referenceRepository.createQueryBuilder('r')
@@ -140,7 +139,7 @@ export class ReferencesService {
     if (cityId) {
       query = query.where('rp.city_id = :cityId', { cityId });
     }
-    
+
     query = query.limit(limit || undefined)
       .skip(offset)
       .orderBy('r.id', 'DESC');
@@ -151,7 +150,7 @@ export class ReferencesService {
 
     const data = await query.getMany();
 
-    return data;    
+    return data;
   }
 
   /**
@@ -161,7 +160,7 @@ export class ReferencesService {
    * @return {*}  {Promise<Reference>}
    * @memberof ReferencesService
    */
-  public async findOne(findOneInput: FindOneInput): Promise<Reference> {
+  public async findOne (findOneInput: FindOneInput): Promise<Reference> {
     const { uniqueCode } = findOneInput;
 
     const existing = await this.referenceRepository.createQueryBuilder('r')
@@ -179,7 +178,7 @@ export class ReferencesService {
    * @return {*}  {Promise<Reference>}
    * @memberof ReferencesService
    */
-  public async update(findOneInput: FindOneInput, updateInput: UpdateInput): Promise<Reference> {
+  public async update (findOneInput: FindOneInput, updateInput: UpdateInput): Promise<Reference> {
     const { uniqueCode } = findOneInput;
 
     const existing = await this.findOne({ uniqueCode });
@@ -206,7 +205,7 @@ export class ReferencesService {
     return saved;
   }
 
-  public async uploadReferences(file: UploadFile): Promise<any> {
+  public async uploadReferences (file: UploadFile): Promise<any> {
     (async () => {
       const fileContent: string = file.buffer.toString('utf-8');
 
@@ -283,7 +282,6 @@ export class ReferencesService {
           });
         }
       }
-
     })()
       .catch(err => Logger.error(err));
 

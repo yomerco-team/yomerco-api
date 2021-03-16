@@ -8,7 +8,7 @@ import { GetParameterValueInput } from './dto/get-parameter-value-input.dto';
 
 @Injectable()
 export class ParametersService {
-  constructor(
+  constructor (
     @InjectRepository(Parameter)
     private readonly parameterRepository: Repository<Parameter>
   ) {}
@@ -20,11 +20,11 @@ export class ParametersService {
    * @return {*}  {Promise<string>}
    * @memberof ParametersService
    */
-  public async getParameterValue(getParameterValueInput: GetParameterValueInput): Promise<string> {
+  public async getParameterValue (getParameterValueInput: GetParameterValueInput): Promise<string> {
     const { name } = getParameterValueInput;
 
     const parameter = await this.parameterRepository.createQueryBuilder('p')
-      .where('p.name = :name',{ name })
+      .where('p.name = :name', { name })
       .getOne();
 
     if (!parameter) {

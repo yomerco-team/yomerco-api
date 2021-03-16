@@ -28,5 +28,4 @@ export class Country {
   // relations
   @OneToMany(() => State, state => state.country)
   states: State[];
-
 }

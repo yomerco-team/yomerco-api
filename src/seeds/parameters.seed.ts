@@ -19,14 +19,13 @@ export const ParameterFactory = {
   },
 
   handle: async (connection: Connection): Promise<void> => {
-    const items = ParameterFactory.build(connection);    
+    const items = ParameterFactory.build(connection);
 
     for (const item of items) {
       const found = await connection.getRepository(Parameter).createQueryBuilder('p')
         .where('p.name = :name', { name: item.name })
         .getOne();
 
-      
       let itemToHandle;
 
       if (found) {

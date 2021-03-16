@@ -1,8 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class CreateProductProvridersTable1610134556840 implements MigrationInterface {
-
-  public async up(queryRunner: QueryRunner): Promise<void> {
+  public async up (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
       create table product_providers
       (
@@ -20,8 +19,7 @@ export class CreateProductProvridersTable1610134556840 implements MigrationInter
     `);
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {
+  public async down (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query('drop table "product_providers"');
   }
-
 }

@@ -8,7 +8,7 @@ import { GetByNameInput } from './dto/get-by-name-input.dto';
 
 @Injectable()
 export class SubCategoriesService {
-  constructor(
+  constructor (
     @InjectRepository(SubCategory)
     private readonly subCategoryRepository: Repository<SubCategory>
   ) {}
@@ -20,13 +20,13 @@ export class SubCategoriesService {
    * @return {*}  {Promise<SubCategory>}
    * @memberof SubCategoriesService
    */
-  public async getByName(getByNameInput: GetByNameInput): Promise<SubCategory> {
+  public async getByName (getByNameInput: GetByNameInput): Promise<SubCategory> {
     const { name } = getByNameInput;
 
     const subCategory = await this.subCategoryRepository.findOne({ where: { name } });
 
     if (!subCategory) return null;
-    
+
     return subCategory;
   }
 }
