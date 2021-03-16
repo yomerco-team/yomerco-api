@@ -27,6 +27,7 @@ import { ReferencesInWharehousesModule } from './modules/references-in-wharehous
 import { InventoryEntriesModule } from './modules/inventory-entries/inventory-entries.module';
 import { InventoryEntryDetailsModule } from './modules/inventory-entry-details/inventory-entry-details.module';
 import { UserTypesModule } from './modules/user-types/user-types.module';
+import { UsersModule } from './modules/users/users.module';
 
 const NODE_ENV = process.env.NODE_ENV || 'local';
 const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
@@ -68,7 +69,8 @@ const envPath = path.resolve(__dirname, `../.env.${NODE_ENV}`);
     ReferencesInWharehousesModule,
     InventoryEntriesModule,
     InventoryEntryDetailsModule,
-    UserTypesModule
+    UserTypesModule,
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService]
