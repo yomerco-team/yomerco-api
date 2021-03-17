@@ -32,5 +32,12 @@ export default registerAs('config', () => ({
     cloudName: process.env.CLOUDINARY_CLOUD_NAME,
     apiKey: process.env.CLOUDINARY_API_KEY,
     apiSecret: process.env.CLOUDINARY_API_SECRET
+  },
+  acl: {
+    baseUrl: process.env.BASIC_ACL_BASE_URL,
+    companyUuid: process.env.BASIC_ACL_COMPANY_UUID,
+    email: process.env.BASIC_ACL_ADMIN_EMAIL,
+    password: process.env.BASIC_ACL_ADMIN_PASSWORD,
+    projectCode: process.env.BASIC_ACL_PROJECT_CODE
   }
 }));

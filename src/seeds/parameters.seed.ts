@@ -8,6 +8,11 @@ export const ParameterFactory = {
         name: 'DEFAULT_SUB_CATEGORY_NAME',
         value: 'Por Categorizar',
         description: 'default sub category'
+      },
+      {
+        name: 'ACL_CUSTOMER_ROLE_CODE',
+        value: '01C',
+        description: 'customer role code in basic acl'
       }
     ];
 
