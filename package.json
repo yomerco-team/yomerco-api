@@ -29,7 +29,7 @@
     "@google-cloud/storage": "5.8.1",
     "@nestjs/common": "7.6.13",
     "@nestjs/config": "0.6.3",
-    "@nestjs/core": "7.6.13",
+    "@nestjs/core": "9.0.5",
     "@nestjs/platform-express": "7.6.13",
     "@nestjs/swagger": "4.7.16",
     "@nestjs/typeorm": "7.1.5",
